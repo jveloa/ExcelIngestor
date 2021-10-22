@@ -40,6 +40,7 @@ $this->beginPage()
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
@@ -47,13 +48,15 @@ $this->beginPage()
                 '<li>'
                  .Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                  .Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
                 . '</li>'
             )
         ],
+
+
     ]);
     NavBar::end();
     ?>
