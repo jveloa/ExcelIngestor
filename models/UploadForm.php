@@ -1,14 +1,8 @@
 <?php
-    /**
-     *Describe
-     * @author zcy
-     * @date 2019/8/13
-     */
     
     namespace app\models;
     
     use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-
     use yii\db\ActiveRecord;
     use yii\web\UploadedFile;
     
@@ -245,6 +239,12 @@
         
         public function deleteExcel(){
             unlink('upload/' . 'Files/' . $this->file->name);
+        }
+        
+        public function newProvincia(){
+            $pro = new Provincia();
+            $pro->nombre = "La habana";
+            $pro->save();
         }
     }
 
