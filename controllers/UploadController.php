@@ -21,8 +21,9 @@ class UploadController extends Controller
             if (!$model->upload()) {
                 print "error";
             }
-            $model->readExcel();
+            $data = $model->readExcel();
             $model->deleteExcel();
+            $model->inputExcelDB($data);
         }
 
         return $this->render('excel', ['file' => $model]);

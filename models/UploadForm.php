@@ -1,15 +1,29 @@
 <?php
     
     namespace app\models;
-    
+
+    use app\services\ConvivenciaService;
+    use app\services\DatoMilitarService;
+    use app\services\DependenciaEconService;
+    use app\services\EgresadoService;
+    use app\services\EstadoCivilService;
+    use app\services\EstudianteService;
+    use app\services\ExperienciaDireccionService;
+    use app\services\IngresoService;
+    use app\services\IntegracionPoliticaService;
+    use app\services\MunicipioSevices;
+    use app\services\NivelEscolaridadService;
+    use app\services\ProvinciaService;
+    use app\services\SectorOcupacionalService;
     use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-    use yii\db\ActiveRecord;
+    use yii\base\Model;
     use yii\web\UploadedFile;
-    
-    
-    class uploadForm extends ActiveRecord{
+    use yii;
+
+
+    class UploadForm extends Model{
         public $file;
-        
+    
         public function rules(){
             return [
                 [
@@ -59,10 +73,10 @@
                 'matematica'        => $sheet->getCell("b8")->getValue(),
                 'español'           => $sheet->getCell("b9")->getValue(),
                 'historia'          => $sheet->getCell("b10")->getValue(),
+                'indiceAca'         => $sheet->getCell("b11")->getValue(),
                 'carnet'            => $sheet->getCell("b12")->getValue(),
                 'datosMil'          => $sheet->getCell("b13")->getValue(),
                 'orgPolitica'       => $sheet->getCell("b14")->getValue(),
-                'indiceAca'         => $sheet->getCell("b15")->getValue(),
                 'expDireccion'      => $sheet->getCell("b15")->getValue(),
                 'concursos'         => $sheet->getCell("b16")->getValue(),
                 
@@ -230,21 +244,79 @@
                 
                 'Computadora'    => $sheet->getCell("b160")->getValue(),
                 'espacioEstudio' => $sheet->getCell("b161")->getValue(),
-            
+
             ];
-            
+    
             $dataFinal = array_merge($data, $data1, $data2, $data3, $data4);
             return $dataFinal;
         }
-        
+    
         public function deleteExcel(){
             unlink('upload/' . 'Files/' . $this->file->name);
         }
+    
+        public function inputExcelDB($data){
+            $trans = Yii::$app->db->beginTransaction();
+            try{
+                //tabla estudiante y todas las tablas que tienen llave foranea en estudiante
+                $idProvincia = ProvinciaService::create($data['provincia']);
+                $idMunicipio = MunicipioSevices::create($data['municipio'], $idProvincia);
+                $idEgresado = EgresadoService::create($data['egresadoDe']);
+                $idIngreso = IngresoService::create($data['viaIngreso']);
+                $idMilitar = DatoMilitarService::create($data['datosMil']);
+                $idIntegracionPolitica = IntegracionPoliticaService::create($data['orgPolitica']);
+                $idExperienciaDireccion = ExperienciaDireccionService::create($data['expDireccion']);
+                $idEstadoCivil = EstadoCivilService::create($data['estadoCivil']);
+                $idConvivencia = ConvivenciaService::create($data['convivenCon']);
+                $idDependenciaEconomica = DependenciaEconService::create($data['dependenciaEco']);
+                $idSectorOcupacionalPadre = SectorOcupacionalService::create($data['trabajoPadre']);
+                $idSectorOcupacionalMadre = SectorOcupacionalService::create($data['trabajoMadre']);
+                $idNivelEscolarPadre = NivelEscolaridadService::create($data['nivelEscolarPadre']);
+                $idNivelEscolarMadre = NivelEscolaridadService::create($data['nivelEscolarMadre']);
+    
+                $dataEstudiante = [
+                    'carnet' => $data['carnet'],
+                    'nombre' => $data['nombre'],
+                    'idMunicipio' => $idMunicipio,
+                    'idEgresado' => $idEgresado,
+                    'idIngreso' => $idIngreso,
+                    'matematica' => $data['matematica'],
+                    'español' => $data['español'],
+                    'historia' => $data['historia'],
+                    'indiceAca' => $data['indiceAca'],
+                    'datosMil' => $idMilitar,
+                    'orgPolitica' => $idIntegracionPolitica,
+                    'expDireccion' => $idExperienciaDireccion,
+                    'becado' => ($data['becado'] == 'Sí'? true:false) ,
+                    'cantHijos' => $data['cantHijos'],
+                    'estadoCivil'=> $idEstadoCivil,
+                    'idConvivencia' => $idConvivencia,
+                    'idDependenciaEconomica' => $idDependenciaEconomica,
+                    'idSectorOcupacionalPadre' => $idSectorOcupacionalPadre,
+                    'idSectorOcupacionalMadre' => $idSectorOcupacionalMadre,
+                    'idNivelEscolarPadre' => $idNivelEscolarPadre,
+                    'idNivelEscolarMadre' => $idNivelEscolarMadre,
+                    'informarFamilia' => $data['informarFamilia']== 'Sí'? true:false,
+                    'numOpcCarrera' => $data['numOpcCarrera'],
+                    'contactoEmail' => $data['contactoEmail'] ,
+                    'contactoTele' => $data['contactoTele'],
+                    
+                ];
+                EstudianteService::createEstudiante($dataEstudiante);
+                
+                $trans->commit();
+                
+            }catch (\Exception $e){
+                $trans->rollBack();
+                print_r($e);
+                throw $e;
+            }
+            
+            
         
-        public function newProvincia(){
-            $pro = new Provincia();
-            $pro->nombre = "La habana";
-            $pro->save();
+        
         }
+    
+    
     }
 

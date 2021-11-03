@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "nivel_escolaridad".
  *
  * @property int $id
- * @property int|null $nivel_escolaridad
+ * @property string|null $nivel_escolaridad
  *
  * @property Estudiante[] $estudiantes
  * @property Estudiante[] $estudiantes0
@@ -29,8 +29,7 @@ class NivelEscolaridad extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nivel_escolaridad'], 'default', 'value' => null],
-            [['nivel_escolaridad'], 'integer'],
+            [['nivel_escolaridad'], 'string'],
         ];
     }
 
