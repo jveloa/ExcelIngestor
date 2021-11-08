@@ -34,7 +34,7 @@ class EstudianteDeporteArte extends \yii\db\ActiveRecord
             [['id_deporte_arte'], 'default', 'value' => null],
             [['id_deporte_arte'], 'integer'],
             [['id_deporte_arte'], 'exist', 'skipOnError' => true, 'targetClass' => DeporteArte::className(), 'targetAttribute' => ['id_deporte_arte' => 'id']],
-            [['id_estudiante'], 'exist', 'skipOnError' => true, 'targetClass' => Estudiante::className(), 'targetAttribute' => ['id_estudiante' => 'carné']],
+            [['id_estudiante'], 'exist', 'skipOnError' => true, 'targetClass' => Estudiante::className(), 'targetAttribute' => ['id_estudiante' => 'carnet']],
         ];
     }
 
@@ -56,7 +56,7 @@ class EstudianteDeporteArte extends \yii\db\ActiveRecord
      */
     public function getDeporteArte()
     {
-        return $this->hasOne(DeporteArte::className(), ['id' => 'id_deporte_arte']);
+        return $this->hasOne(DeporteArte::className(), ['id' => 'id_deporte_arte'])->inverseOf('estudianteDeporteArtes');
     }
 
     /**
@@ -66,6 +66,6 @@ class EstudianteDeporteArte extends \yii\db\ActiveRecord
      */
     public function getEstudiante()
     {
-        return $this->hasOne(Estudiante::className(), ['carné' => 'id_estudiante']);
+        return $this->hasOne(Estudiante::className(), ['carnet' => 'id_estudiante'])->inverseOf('estudianteDeporteArtes');
     }
 }

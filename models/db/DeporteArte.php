@@ -50,6 +50,6 @@ class DeporteArte extends \yii\db\ActiveRecord
      */
     public function getEstudianteDeporteArtes()
     {
-        return $this->hasMany(EstudianteDeporteArte::className(), ['id_deporte_arte' => 'id']);
+        return $this->hasMany(EstudianteDeporteArte::className(), ['id_deporte_arte' => 'id'])->inverseOf('deporteArte');
     }
 }
