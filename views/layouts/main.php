@@ -41,6 +41,9 @@ $this->beginPage()
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
+            ['label' => 'Reporte por via de egreso', 'url'=> ['/report/egresado']],
+
+
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
