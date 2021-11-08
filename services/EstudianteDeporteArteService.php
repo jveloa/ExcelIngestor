@@ -13,7 +13,7 @@
                 $pro = new EstudianteDeporteArte();
                 $pro->id_estudiante = $idEstudiante;
                 $pro->id_deporte_arte = $idDeporteArte;
-                $pro->save();
+                $pro->save(false);
                 return true;
             }
             return false;

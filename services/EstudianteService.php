@@ -111,9 +111,9 @@
                 $est->id_dispo_copumtadora        = $dataEstdiante['idDispPc'];
                 $est->id_espacio_estudiar         = $dataEstdiante['idEspacioEstudiar'];
                 $est->save(false);
-                return self::get($data['nombre'])['nombre'];
+                return self::get($data['nombre'])['carnet'];
             }
-            return false;
+            return self::get($data['nombre'])['carnet'];
         }
         
         static function get($nombre){

@@ -2,11 +2,14 @@
     
     namespace app\models;
 
+    use app\models\db\EstudianteDeporteArte;
     use app\services\ConvivenciaService;
     use app\services\DatoMilitarService;
     use app\services\DependenciaEconService;
+    use app\services\DeporteArteService;
     use app\services\EgresadoService;
     use app\services\EstadoCivilService;
+    use app\services\EstudianteDeporteArteService;
     use app\services\EstudianteService;
     use app\services\ExperienciaDireccionService;
     use app\services\IngresoService;
@@ -358,7 +361,14 @@
                     'idEspacioEstudiar'        => $idEspacioEstudiar,
                 ];
         
-                EstudianteService::createEstudiante($dataEstudiante, $data);
+                $idEstudiante = EstudianteService::createEstudiante($dataEstudiante, $data);
+                $listaDeporte =explode(",", $data['deportes']);
+                foreach ($listaDeporte as $deporte){
+                    if($deporte != ""){
+                        $id = DeporteArteService::create($deporte);
+                        EstudianteDeporteArteService::create($idEstudiante,$id);
+                    }
+                }
                 $trans->commit();
                 
             }catch (\Exception $e){
