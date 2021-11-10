@@ -33,18 +33,18 @@ $listaEgresado = \yii\helpers\BaseArrayHelper::map($egresadoData, 'id', 'lugar')
 
 
 <div class="row">
-    <div class="col">Nombre y apellidos</div>
+    <div class="col">Por estudiante por lugar de ingreso seleccionado</div>
 </div>
 <div id="feedback">
     <?php if ($seleccionEgresado != "")
     {
         //echo $seleccionEgresado;
-        $estudiante = Estudiante::find()->where(['id_egresado' => $seleccionEgresado])->orderBy("carnet")->all();
+        $estudiante = Estudiante::find()->where(['id_egresado' => $seleccionEgresado])->orderBy("carne")->all();
         $cantEstudiante=Estudiante::find()->where(['id_egresado' => $seleccionEgresado])->count();
     }
     else
     { //echo "Es nulo";
-        $estudiante=Estudiante::find()->orderBy("carnet")->all();
+        $estudiante=Estudiante::find()->orderBy("carne")->all();
         $cantEstudiante=Estudiante::find()->count();}?>
     <?php foreach($estudiante as $est) { ?>
         <div class="col"><?php echo $est->nombre?></div>
