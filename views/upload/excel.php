@@ -19,7 +19,7 @@ $form = ActiveForm::begin([
         <?= $form->field($model, 'file')->fileInput() ?>
     </div>
 
-    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+    <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary', 'name' => 'send-button']) ?>
 </div>
 <?php ActiveForm::end() ?>
 

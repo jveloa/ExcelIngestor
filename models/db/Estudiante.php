@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "estudiante".
  *
  * @property string $nombre nombre y apellidos
- * @property string $carnet
+ * @property string $carne
  * @property int $id_municipio
  * @property int $id_egresado Egresado de (IPVCE, Preuniversitario urbano, Preuniversitario becado, Técnico medio, Facultad obrero-campesina, Estudio en el exterior, otro)
  * @property int $id_ingreso Vía de ingreso (Directamente del pre, Concurso, otro)
@@ -128,7 +128,8 @@ use Yii;
  * @property RespSobreFuturo $escritorExpositor
  * @property RespPreguntasMas $espacioEstudiar
  * @property EstadoCivil $estadoCivil
- * @property EstudianteDeporteArte[] $estudianteDeporteArtes
+ * @property EstudianteArte $estudianteArte
+ * @property EstudianteDeporte[] $estudianteDeportes
  * @property RespSobreFuturo $estudioEjercicios
  * @property RespSobreFuturo $estudioGrupal
  * @property RespSobreFuturo $estudioLibro
@@ -184,12 +185,12 @@ class Estudiante extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'carnet', 'id_municipio', 'id_egresado', 'id_ingreso', 'nota_matematica', 'nota_espannol', 'nota_historia', 'indice_academico', 'id_dato_militar', 'id_integracion_politica', 'id_experiencia_direccion', 'becado', 'cantidad_hijos', 'estado_civil', 'id_convivencia', 'id_dependencia_economica', 'id_sector_ocupacional_padre', 'id_sector_ocupacional_madre', 'id_nivel_escolaridad_padre', 'id_nivel_escolaridad_madre', 'informar_familia', 'carerra_opcion', 'id_lo_escencial', 'id_no_solo_de_pan', 'id_camaron_que', 'id_a_es_menor', 'id_editores_texto', 'id_hojas_de_calculo', 'id_editores_presentaciones', 'id_software_grafico', 'id_lenguajes_programacion', 'id_dispo_copumtadora', 'id_espacio_estudiar', 'id_tiempo_transcurrido', 'id_desicion_estudiar', 'xq_me_gusta', 'para_tener_titulo', 'complacer_padres', 'prepararme_futuro', 'se_parece_a_otra', 'para_ser_alguien', 'sugerencia_familiar', 'familia', 'amigos', 'profesores', 'desicion_personal', 'no_oportunidad', 'exp_circulos_interes', 'exp_conf_charlas', 'exp_concursos', 'exp_joven_club', 'exp_familias_conocido', 'experiencias_otras', 'id_mantener_est_carrera', 'id_trabajo_graduado', 'id_programador', 'id_probador', 'id_diseñador_sotf', 'id_diseñador_ui_ux', 'id_seguridad', 'id_escritor_expositor', 'id_gestor_proyectos', 'id_facilitador_desiciones', 'id_desempeño_profesional', 'id_relacion_carreras', 'id_importancia_socie', 'id_influencia_cien_tec', 'id_superacion_constante', 'id_horas_estudio', 'id_horas_otros_trabajos', 'id_horas_recreacion', 'id_estudio_libro', 'id_estudio_grupal', 'id_estudio_ejercicios', 'id_estudio_repasadores', 'id_interes_apoyar_orga', 'id_interes_prob_soc_ambi', 'id_interes_prac_laborales', 'vocacion', 'campañas_divulgativas', 'seguir_con_amigos', 'id_practicas_artes', 'id_practicas_deportes', 'id_fumador', 'id_bebedor'], 'required'],
-            [['nombre', 'carnet', 'contacto_email', 'contacto_telefono', 'comentario_deporte', 'comentario_arte', 'ultimo_libro', 'anno_ultimo_libro', 'penultimo_libro', 'anno_penultimo_libro', 'antepenultimo_libro', 'anno_antepenultimo_libro', 'musica_favorita', 'razones_otras', 'influencias_otras', 'experiencias_otras', 'comentario_mantener_est', 'concursos', 'curso'], 'string'],
+            [['nombre', 'carne', 'id_municipio', 'id_egresado', 'id_ingreso', 'nota_matematica', 'nota_espannol', 'nota_historia', 'indice_academico', 'id_dato_militar', 'id_integracion_politica', 'id_experiencia_direccion', 'becado', 'cantidad_hijos', 'estado_civil', 'id_convivencia', 'id_dependencia_economica', 'id_sector_ocupacional_padre', 'id_sector_ocupacional_madre', 'id_nivel_escolaridad_padre', 'id_nivel_escolaridad_madre', 'informar_familia', 'carerra_opcion', 'id_lo_escencial', 'id_no_solo_de_pan', 'id_camaron_que', 'id_a_es_menor', 'id_editores_texto', 'id_hojas_de_calculo', 'id_editores_presentaciones', 'id_software_grafico', 'id_lenguajes_programacion', 'id_dispo_copumtadora', 'id_espacio_estudiar', 'id_tiempo_transcurrido', 'id_desicion_estudiar', 'xq_me_gusta', 'para_tener_titulo', 'complacer_padres', 'prepararme_futuro', 'se_parece_a_otra', 'para_ser_alguien', 'sugerencia_familiar', 'familia', 'amigos', 'profesores', 'desicion_personal', 'no_oportunidad', 'exp_circulos_interes', 'exp_conf_charlas', 'exp_concursos', 'exp_joven_club', 'exp_familias_conocido', 'experiencias_otras', 'id_mantener_est_carrera', 'id_trabajo_graduado', 'id_programador', 'id_probador', 'id_diseñador_sotf', 'id_diseñador_ui_ux', 'id_seguridad', 'id_escritor_expositor', 'id_gestor_proyectos', 'id_facilitador_desiciones', 'id_desempeño_profesional', 'id_relacion_carreras', 'id_importancia_socie', 'id_influencia_cien_tec', 'id_superacion_constante', 'id_horas_estudio', 'id_horas_otros_trabajos', 'id_horas_recreacion', 'id_estudio_libro', 'id_estudio_grupal', 'id_estudio_ejercicios', 'id_estudio_repasadores', 'id_interes_apoyar_orga', 'id_interes_prob_soc_ambi', 'id_interes_prac_laborales', 'vocacion', 'campañas_divulgativas', 'seguir_con_amigos', 'id_practicas_artes', 'id_practicas_deportes', 'id_fumador', 'id_bebedor'], 'required'],
+            [['nombre', 'carne', 'contacto_email', 'contacto_telefono', 'comentario_deporte', 'comentario_arte', 'ultimo_libro', 'anno_ultimo_libro', 'penultimo_libro', 'anno_penultimo_libro', 'antepenultimo_libro', 'anno_antepenultimo_libro', 'musica_favorita', 'razones_otras', 'influencias_otras', 'experiencias_otras', 'comentario_mantener_est', 'concursos', 'curso'], 'string'],
             [['id_municipio', 'id_egresado', 'id_ingreso', 'nota_matematica', 'nota_espannol', 'nota_historia', 'indice_academico', 'id_dato_militar', 'id_integracion_politica', 'id_experiencia_direccion', 'cantidad_hijos', 'estado_civil', 'id_convivencia', 'id_dependencia_economica', 'id_sector_ocupacional_padre', 'id_sector_ocupacional_madre', 'id_nivel_escolaridad_padre', 'id_nivel_escolaridad_madre', 'carerra_opcion', 'id_lo_escencial', 'id_no_solo_de_pan', 'id_camaron_que', 'id_a_es_menor', 'id_editores_texto', 'id_hojas_de_calculo', 'id_editores_presentaciones', 'id_software_grafico', 'id_lenguajes_programacion', 'id_dispo_copumtadora', 'id_espacio_estudiar', 'id_tiempo_transcurrido', 'id_desicion_estudiar', 'id_mantener_est_carrera', 'id_trabajo_graduado', 'id_programador', 'id_probador', 'id_diseñador_sotf', 'id_diseñador_ui_ux', 'id_seguridad', 'id_escritor_expositor', 'id_gestor_proyectos', 'id_facilitador_desiciones', 'id_desempeño_profesional', 'id_relacion_carreras', 'id_importancia_socie', 'id_influencia_cien_tec', 'id_superacion_constante', 'id_horas_estudio', 'id_horas_otros_trabajos', 'id_horas_recreacion', 'id_estudio_libro', 'id_estudio_grupal', 'id_estudio_ejercicios', 'id_estudio_repasadores', 'id_interes_apoyar_orga', 'id_interes_prob_soc_ambi', 'id_interes_prac_laborales', 'id_practicas_artes', 'id_practicas_deportes', 'id_fumador', 'id_bebedor'], 'default', 'value' => null],
             [['id_municipio', 'id_egresado', 'id_ingreso', 'nota_matematica', 'nota_espannol', 'nota_historia', 'indice_academico', 'id_dato_militar', 'id_integracion_politica', 'id_experiencia_direccion', 'cantidad_hijos', 'estado_civil', 'id_convivencia', 'id_dependencia_economica', 'id_sector_ocupacional_padre', 'id_sector_ocupacional_madre', 'id_nivel_escolaridad_padre', 'id_nivel_escolaridad_madre', 'carerra_opcion', 'id_lo_escencial', 'id_no_solo_de_pan', 'id_camaron_que', 'id_a_es_menor', 'id_editores_texto', 'id_hojas_de_calculo', 'id_editores_presentaciones', 'id_software_grafico', 'id_lenguajes_programacion', 'id_dispo_copumtadora', 'id_espacio_estudiar', 'id_tiempo_transcurrido', 'id_desicion_estudiar', 'id_mantener_est_carrera', 'id_trabajo_graduado', 'id_programador', 'id_probador', 'id_diseñador_sotf', 'id_diseñador_ui_ux', 'id_seguridad', 'id_escritor_expositor', 'id_gestor_proyectos', 'id_facilitador_desiciones', 'id_desempeño_profesional', 'id_relacion_carreras', 'id_importancia_socie', 'id_influencia_cien_tec', 'id_superacion_constante', 'id_horas_estudio', 'id_horas_otros_trabajos', 'id_horas_recreacion', 'id_estudio_libro', 'id_estudio_grupal', 'id_estudio_ejercicios', 'id_estudio_repasadores', 'id_interes_apoyar_orga', 'id_interes_prob_soc_ambi', 'id_interes_prac_laborales', 'id_practicas_artes', 'id_practicas_deportes', 'id_fumador', 'id_bebedor'], 'integer'],
             [['becado', 'informar_familia', 'xq_me_gusta', 'para_tener_titulo', 'complacer_padres', 'prepararme_futuro', 'se_parece_a_otra', 'para_ser_alguien', 'sugerencia_familiar', 'familia', 'amigos', 'profesores', 'desicion_personal', 'no_oportunidad', 'exp_circulos_interes', 'exp_conf_charlas', 'exp_concursos', 'exp_joven_club', 'exp_familias_conocido', 'vocacion', 'campañas_divulgativas', 'seguir_con_amigos'], 'boolean'],
-            [['carnet'], 'unique'],
+            [['carne'], 'unique'],
             [['id_convivencia'], 'exist', 'skipOnError' => true, 'targetClass' => Convivencia::className(), 'targetAttribute' => ['id_convivencia' => 'id']],
             [['id_dato_militar'], 'exist', 'skipOnError' => true, 'targetClass' => DatoMilitar::className(), 'targetAttribute' => ['id_dato_militar' => 'id']],
             [['id_dependencia_economica'], 'exist', 'skipOnError' => true, 'targetClass' => DependenciaEconomica::className(), 'targetAttribute' => ['id_dependencia_economica' => 'id']],
@@ -256,7 +257,7 @@ class Estudiante extends \yii\db\ActiveRecord
     {
         return [
             'nombre' => 'nombre y apellidos',
-            'carnet' => 'Carnet',
+            'carne' => 'Carne',
             'id_municipio' => 'Id Municipio',
             'id_egresado' => 'Egresado de (IPVCE, Preuniversitario urbano, Preuniversitario becado, Técnico medio, Facultad obrero-campesina, Estudio en el exterior, otro)',
             'id_ingreso' => 'Vía de ingreso (Directamente del pre, Concurso, otro)',
@@ -541,13 +542,23 @@ class Estudiante extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[EstudianteDeporteArtes]].
+     * Gets query for [[EstudianteArte]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEstudianteDeporteArtes()
+    public function getEstudianteArte()
     {
-        return $this->hasMany(EstudianteDeporteArte::className(), ['id_estudiante' => 'carnet'])->inverseOf('estudiante');
+        return $this->hasOne(EstudianteArte::className(), ['id_estudiante' => 'carne'])->inverseOf('estudiante');
+    }
+
+    /**
+     * Gets query for [[EstudianteDeportes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstudianteDeportes()
+    {
+        return $this->hasMany(EstudianteDeporte::className(), ['id_estudiante' => 'carne'])->inverseOf('estudiante');
     }
 
     /**

@@ -9,7 +9,7 @@
             $found = self::get($data['nombre']);
             if (!isset($found)){
                 $est                              = new Estudiante();
-                $est->carnet                      = $data['carnet'];
+                $est->carne                       = $data['carne'];
                 $est->nombre                      = $data['nombre'];
                 $est->id_municipio                = $dataEstdiante['idMunicipio'];
                 $est->id_egresado                 = $dataEstdiante['idEgresado'];
@@ -35,8 +35,8 @@
                 $est->contacto_email              = $data['contactoEmail'];
                 $est->contacto_telefono           = $data['contactoTele'];
                 $est->id_tiempo_transcurrido      = $dataEstdiante['idTiempoTranscurrido'];
-                $est->carerra_opcion              = $data['numOpcCarrera'];
-                $est->id_desicion_estudiar        = $dataEstdiante['idMantenerEstCarrera'];
+                $est->carerra_opcion              = $dataEstdiante['idCarreraOpcion'];
+                $est->id_desicion_estudiar        = $dataEstdiante['idDesicionEstudiar'];
                 $est->xq_me_gusta                 = $data['meGusta'];
                 $est->para_tener_titulo           = $data['tituloUnive'];
                 $est->complacer_padres            = $data['complacerPadres'];
@@ -111,9 +111,9 @@
                 $est->id_dispo_copumtadora        = $dataEstdiante['idDispPc'];
                 $est->id_espacio_estudiar         = $dataEstdiante['idEspacioEstudiar'];
                 $est->save(false);
-                return self::get($data['nombre'])['carnet'];
+                return self::get($data['nombre'])['carne'];
             }
-            return self::get($data['nombre'])['carnet'];
+            return self::get($data['nombre'])['carne'];
         }
         
         static function get($nombre){

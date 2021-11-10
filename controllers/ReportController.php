@@ -6,6 +6,7 @@ use app\models\db\EgresadoDe;
 use app\models\EgresadoNotasForm;
 use app\models\UploadForm;
 
+use app\models\ViaIngresoForm;
 use Yii;
 use yii\data\SqlDataProvider;
 use yii\web\Controller;
@@ -30,6 +31,14 @@ class ReportController extends Controller
 
         return $this->render('egresado', ['seleccionEgresado'=>"", 'mymodel'=> $model]);
 
+    }
+    
+    public function  actionIngreso(){
+        $model = new ViaIngresoForm();
+        if($model->load(Yii::$app->request->post())){
+            return this.$this->render('viaIngreso',['model' => $model]);
+        }
+        return $this->render('viaIngreso',['model'=> $model]);
     }
 
     public function actionEgresadonotas()

@@ -12,6 +12,8 @@ use Yii;
  *
  * @property Estudiante[] $estudiantes
  * @property Estudiante[] $estudiantes0
+ * @property Estudiante[] $estudiantes1
+ * @property Estudiante[] $estudiantes2
  */
 class RespDeporteArte extends \yii\db\ActiveRecord
 {
@@ -63,5 +65,25 @@ class RespDeporteArte extends \yii\db\ActiveRecord
     public function getEstudiantes0()
     {
         return $this->hasMany(Estudiante::className(), ['id_practicas_deportes' => 'id'])->inverseOf('practicasDeportes');
+    }
+
+    /**
+     * Gets query for [[Estudiantes1]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstudiantes1()
+    {
+        return $this->hasMany(Estudiante::className(), ['id_fumador' => 'id'])->inverseOf('fumador');
+    }
+
+    /**
+     * Gets query for [[Estudiantes2]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEstudiantes2()
+    {
+        return $this->hasMany(Estudiante::className(), ['id_bebedor' => 'id'])->inverseOf('bebedor');
     }
 }

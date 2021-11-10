@@ -5,21 +5,21 @@ namespace app\models\db;
 use Yii;
 
 /**
- * This is the model class for table "pregunta".
+ * This is the model class for table "deporte".
  *
  * @property int $id
- * @property string|null $pregunta
+ * @property string|null $deporte
  *
- * @property EstudiantePregResp[] $estudiantePregResps
+ * @property EstudianteDeporte[] $estudianteDeportes
  */
-class Pregunta extends \yii\db\ActiveRecord
+class Deporte extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'pregunta';
+        return 'deporte';
     }
 
     /**
@@ -28,7 +28,7 @@ class Pregunta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pregunta'], 'string'],
+            [['deporte'], 'string'],
         ];
     }
 
@@ -39,17 +39,17 @@ class Pregunta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'pregunta' => 'Pregunta',
+            'deporte' => 'Deporte',
         ];
     }
 
     /**
-     * Gets query for [[EstudiantePregResps]].
+     * Gets query for [[EstudianteDeportes]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEstudiantePregResps()
+    public function getEstudianteDeportes()
     {
-        return $this->hasMany(EstudiantePregResp::className(), ['id_pregunta' => 'id']);
+        return $this->hasMany(EstudianteDeporte::className(), ['id_deporte' => 'id'])->inverseOf('deporte');
     }
 }
