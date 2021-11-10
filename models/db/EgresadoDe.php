@@ -17,7 +17,6 @@ class EgresadoDe extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public $myid;
     public static function tableName()
     {
         return 'egresado_de';

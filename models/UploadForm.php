@@ -1,15 +1,16 @@
 <?php
     
     namespace app\models;
-
-    use app\models\db\EstudianteDeporteArte;
+    
+    use app\services\ArteService;
     use app\services\ConvivenciaService;
     use app\services\DatoMilitarService;
     use app\services\DependenciaEconService;
-    use app\services\DeporteArteService;
+    use app\services\DeporteService;
     use app\services\EgresadoService;
     use app\services\EstadoCivilService;
-    use app\services\EstudianteDeporteArteService;
+    use app\services\EstudianteArteService;
+    use app\services\EstudianteDeporteService;
     use app\services\EstudianteService;
     use app\services\ExperienciaDireccionService;
     use app\services\IngresoService;
@@ -81,7 +82,7 @@
                 'español'           => $sheet->getCell("b9")->getValue(),
                 'historia'          => $sheet->getCell("b10")->getValue(),
                 'indiceAca'         => $sheet->getCell("b11")->getValue(),
-                'carnet'            => $sheet->getCell("b12")->getValue(),
+                'carne'            => $sheet->getCell("b12")->getValue(),
                 'datosMil'          => $sheet->getCell("b13")->getValue(),
                 'orgPolitica'       => $sheet->getCell("b14")->getValue(),
                 'expDireccion'      => $sheet->getCell("b15")->getValue(),
@@ -363,12 +364,20 @@
         
                 $idEstudiante = EstudianteService::createEstudiante($dataEstudiante, $data);
                 $listaDeporte =explode(",", $data['deportes']);
+                $listaArte = explode(",",$data['artes']);
                 foreach ($listaDeporte as $deporte){
                     if($deporte != ""){
-                        $id = DeporteArteService::create($deporte);
-                        EstudianteDeporteArteService::create($idEstudiante,$id);
+                        $idDeporte = DeporteService::create($deporte);
+                        EstudianteDeporteService::create($idEstudiante,$idDeporte);
                     }
                 }
+                foreach ($listaArte as $arte){
+                    if($arte != ""){
+                        $idArte = ArteService::create($arte);
+                        EstudianteArteService::create($idEstudiante,$idArte);
+                    }
+                }
+                
                 $trans->commit();
                 
             }catch (\Exception $e){
