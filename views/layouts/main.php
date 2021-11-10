@@ -42,6 +42,7 @@ $this->beginPage()
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
             ['label' => 'Reporte por via de egreso', 'url'=> ['/report/egresado']],
+            ['label' => 'Reporte por ingreso', 'url'=> ['/report/egresadonotas']],
 
 
 

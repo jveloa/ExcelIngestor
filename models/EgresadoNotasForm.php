@@ -4,12 +4,9 @@
 namespace app\models;
 use yii\base\Model;
 
-
-class EgresadoForm extends Model
-
-
+class EgresadoNotasForm extends Model
 {
-   public $egresoid;
+    public $egresoid;
 
     public function rules()
     {
@@ -17,10 +14,13 @@ class EgresadoForm extends Model
             [['egresoid'], 'number'],
         ];
     }
+
     public function attributeLabels()
     {
         return [
             'egresoid' => 'Lugar de egreso'
         ];
     }
+
+
 }
