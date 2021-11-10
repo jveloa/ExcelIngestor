@@ -11,17 +11,18 @@
 
 <?php
     /* @var $this \yii\web\View */
-   
+    /* @var $model \app\models\ViaIngresoForm */
+    
     
     $form1 = ActiveForm::begin();
-    $egresadoData  = app\models\db\EgresadoDe::find()->all();
-    $listaEgresado = \yii\helpers\BaseArrayHelper::map($egresadoData, 'id', 'lugar')
+    $ingresoData  = app\models\db\Ingreso::find()->all();
+    $listaIngresos = \yii\helpers\BaseArrayHelper::map($ingresoData , 'id', 'via_ingreso')
 
 ?>
 <div class="p-2">
-    <?= $form1->field($mymodel, 'egresoid')->dropdownList($listaEgresado, [
+    <?= $form1->field($model, 'idIngreso')->dropdownList($listaIngresos, [
         'prompt'  => 'Seleccione',
-        'options' => [$seleccionEgresado => ['selected' => true]]
+        'options' => [$model->idIngreso => ['selected' => true]]
     ]); ?>
 </div>
 
@@ -35,16 +36,17 @@
     <div class="col">Nombre y apellidos</div>
 </div>
 <div id="feedback">
-    <?php if ($seleccionEgresado != ""){
+    <?php if ($model->idIngreso != ""){
         //echo $seleccionEgresado;
-        $estudiante     = Estudiante::find()->where(['id_egresado' => $seleccionEgresado])->orderBy("carne")->all();
-        $cantEstudiante = Estudiante::find()->where(['id_egresado' => $seleccionEgresado])->count();
+        $estudiante     = Estudiante::find()->where(['id_ingreso' => $model->idIngreso])->orderBy("carne")->all();
+        $cantEstudiante = Estudiante::find()->where(['id_ingreso' => $model->idIngreso])->count();
     }else{ //echo "Es nulo";
         $estudiante     = Estudiante::find()->orderBy("carne")->all();
         $cantEstudiante = Estudiante::find()->count();
     } ?>
     <?php foreach ($estudiante as $est){ ?>
         <div class="col"><?php echo $est->nombre ?></div>
+        
         
         <?php
         

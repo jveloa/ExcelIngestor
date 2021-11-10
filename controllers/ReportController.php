@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\db\EgresadoDe;
 use app\models\UploadForm;
 
+use app\models\ViaIngresoForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessController;
@@ -28,6 +29,14 @@ class ReportController extends Controller
 
         return $this->render('egresado', ['seleccionEgresado'=>"", 'mymodel'=> $model]);
 
+    }
+    
+    public function  actionIngreso(){
+        $model = new ViaIngresoForm();
+        if($model->load(Yii::$app->request->post())){
+            return this.$this->render('viaIngreso',['model' => $model]);
+        }
+        return $this->render('viaIngreso',['model'=> $model]);
     }
 
 
