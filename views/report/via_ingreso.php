@@ -27,7 +27,7 @@
 </div>
 
 <div class="form-group ">
-    <?= Html::submitButton('Filtrar Datos', ['class' => 'btn btn-primary']) ?>
+    <?= Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
 </div>
 <?php $form1 = ActiveForm::end(); ?>
 

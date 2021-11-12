@@ -22,12 +22,14 @@ $listaEgresado = \yii\helpers\BaseArrayHelper::map($egresadoData, 'id', 'lugar')
 
 ?>
 <div class="p-2">
-    <?= $form1->field($mymodel, 'egresoid')->dropdownList($listaEgresado,['prompt'=>'Seleccione','options'=>[$seleccionEgresado=>['selected'=>true]]]);
+    <?= $form1->field($mymodel, 'egresoid')->dropdownList($listaEgresado,[
+            'prompt'=>'Seleccione',
+            'options'=>[$seleccionEgresado=>['selected'=>true]]]);
     ?>
 </div>
 
 <div class="form-group ">
-        <?=  Html::submitButton('Filtrar Datos', ['class' => 'btn btn-primary']) ?>
+        <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
 </div>
 <?php $form1 = ActiveForm::end();?>
 

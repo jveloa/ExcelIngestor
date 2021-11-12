@@ -41,9 +41,18 @@ $this->beginPage()
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
-            ['label' => 'Reporte por via de egreso', 'url'=> ['/report/egresado']],
-            ['label' => 'Reporte por ingreso', 'url'=> ['/report/egresadonotas']],
 
+            [
+                    'label'=>'Reportes',
+                    'items'=>[
+
+                                ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
+                                ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
+                                ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
+                                ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
+                                ['label' => 'Reporte V1 ', 'url'=> ['/report/estudiantes_notas_indice']],
+                    ],
+            ],
 
 
             Yii::$app->user->isGuest ? (
