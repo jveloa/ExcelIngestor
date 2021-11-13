@@ -40,7 +40,7 @@
                     ['archivo'],
                     'file',
                     'skipOnEmpty' => false,
-                    'extensions'  => 'xls,xlsx'
+                    'extensions'  => 'xlsx'
                 ],
                 [
                     ['curso'],
@@ -267,7 +267,6 @@
                 $idIngreso                = IngresoService::create($data['viaIngreso']);
                 $idMilitar                = DatoMilitarService::create($data['datosMil']);
                 $idIntegracionPolitica    = IntegracionPoliticaService::create($data['orgPolitica']);
-                $idExperienciaDireccion   = ExperienciaDireccionService::create($data['expDireccion']);
                 $idEstadoCivil            = EstadoCivilService::create($data['estadoCivil']);
                 $idConvivencia            = ConvivenciaService::create($data['convivenCon']);
                 $idDependenciaEconomica   = DependenciaEconService::create($data['dependenciaEco']);
@@ -326,7 +325,6 @@
                     'idIngreso'                => $idIngreso,
                     'datosMil'                 => $idMilitar,
                     'orgPolitica'              => $idIntegracionPolitica,
-                    'expDireccion'             => $idExperienciaDireccion,
                     'estadoCivil'              => $idEstadoCivil,
                     'idConvivencia'            => $idConvivencia,
                     'idDependenciaEconomica'   => $idDependenciaEconomica,

@@ -20,7 +20,7 @@
                 $est->indice_academico            = $data['indiceAca'];
                 $est->id_dato_militar             = $dataEstdiante['datosMil'];
                 $est->id_integracion_politica     = $dataEstdiante['orgPolitica'];
-                $est->id_experiencia_direccion    = $dataEstdiante['expDireccion'];
+                $est->experiencia_direccion       = $data['expDireccion'];
                 $est->concursos                   = $data['concursos'];
                 $est->becado                      = $data['becado'];
                 $est->cantidad_hijos              = $data['cantHijos'];
