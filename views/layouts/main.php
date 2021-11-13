@@ -39,13 +39,9 @@ $this->beginPage()
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
-
             [
                     'label'=>'Reportes',
                     'items'=>[
-
                         ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
                         ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
                         ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
