@@ -8,6 +8,9 @@
 
     class MunicipioSevices{
         static function create($municipio,$id_provincia){
+            if(!isset($municipio)){
+                $municipio = "No respondío";
+            }
             $found = self::get($municipio);
             if(!isset($found)){
                 $mun = new Municipio();

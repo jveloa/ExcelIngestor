@@ -8,6 +8,9 @@
 
     class DependenciaEconService{
         static function create($dependencia){
+            if(!isset($dependencia)){
+                $dependencia = "No respondío";
+            }
             $found = self::get($dependencia);
             if(!isset($found)){
                 $pro = new DependenciaEconomica();

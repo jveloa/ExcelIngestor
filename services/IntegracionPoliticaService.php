@@ -8,6 +8,9 @@
 
     class IntegracionPoliticaService{
         static function create($integracionPolitica){
+            if(!isset($integracionPolitica)){
+                $integracionPolitica = "No respondío";
+            }
             $found = self::get($integracionPolitica);
             if(!isset($found)){
                 $pro = new IntegracionPolitica();

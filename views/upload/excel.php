@@ -1,25 +1,29 @@
 <?php
-
-
-use yii\widgets\ActiveForm;
-use yii\bootstrap4\Html;
-
-
-$model = new app\models\UploadForm();
-
-$form = ActiveForm::begin([
-    'id' => 'upload',
-    'options' => ['enctype' => 'multipart/form-data'],
-
-])
+    /* @var $this yii\web\View */
+    /* @var $model \app\models\UploadForm */
+    
+    
+    use yii\bootstrap4\Html;
+    use yii\widgets\ActiveForm;
+    
+    
+    $model = new app\models\UploadForm();
+    
+    $form = ActiveForm::begin([
+        'id' => 'upload',
+        'options' => ['enctype' => 'multipart/form-data'],
+    ])
 ?>
 
-<div class="form-group ">
-    <div class="p-2">
-        <?= $form->field($model, 'file')->fileInput() ?>
+<div class="form-group flex-column col-xl-6 ">
+    <div class="p-2 m-4 ">
+        <?= $form->field($model, 'archivo',)->fileInput() ?>
+        <?= $form->field($model, 'curso')->textInput() ?>
+        <?= Html::submitButton('Enviar', [
+            'class' => 'btn btn-primary',
+            'name'  => 'send-button'
+        ]) ?>
     </div>
-
-    <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary', 'name' => 'send-button']) ?>
 </div>
 <?php ActiveForm::end() ?>
 

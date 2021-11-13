@@ -20,7 +20,7 @@
                 $est->indice_academico            = $data['indiceAca'];
                 $est->id_dato_militar             = $dataEstdiante['datosMil'];
                 $est->id_integracion_politica     = $dataEstdiante['orgPolitica'];
-                $est->id_experiencia_direccion    = $dataEstdiante['expDireccion'];
+                $est->experiencia_direccion       = $data['expDireccion'];
                 $est->concursos                   = $data['concursos'];
                 $est->becado                      = $data['becado'];
                 $est->cantidad_hijos              = $data['cantHijos'];
@@ -110,6 +110,7 @@
                 $est->id_lenguajes_programacion   = $dataEstdiante['idLengProgramacion'];
                 $est->id_dispo_copumtadora        = $dataEstdiante['idDispPc'];
                 $est->id_espacio_estudiar         = $dataEstdiante['idEspacioEstudiar'];
+                $est->id_curso                    = $dataEstdiante['idCurso'];
                 $est->save(false);
                 return self::get($data['nombre'])['carne'];
             }

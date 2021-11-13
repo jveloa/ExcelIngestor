@@ -5,21 +5,21 @@ namespace app\models\db;
 use Yii;
 
 /**
- * This is the model class for table "experiencia_direccion".
+ * This is the model class for table "curso".
  *
  * @property int $id
- * @property string|null $organizacion
+ * @property string $curso
  *
  * @property Estudiante[] $estudiantes
  */
-class ExperienciaDireccion extends \yii\db\ActiveRecord
+class Curso extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'experiencia_direccion';
+        return 'curso';
     }
 
     /**
@@ -28,7 +28,8 @@ class ExperienciaDireccion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['organizacion'], 'string'],
+            [['curso'], 'required'],
+            [['curso'], 'string'],
         ];
     }
 
@@ -39,7 +40,7 @@ class ExperienciaDireccion extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'organizacion' => 'Organizacion',
+            'curso' => 'Curso',
         ];
     }
 
@@ -50,6 +51,6 @@ class ExperienciaDireccion extends \yii\db\ActiveRecord
      */
     public function getEstudiantes()
     {
-        return $this->hasMany(Estudiante::className(), ['id_experiencia_direccion' => 'id']);
+        return $this->hasMany(Estudiante::className(), ['id_curso' => 'id'])->inverseOf('curso');
     }
 }

@@ -8,6 +8,9 @@
 
     class NivelEscolaridadService{
         static function create($nivelEscolaridad){
+            if(!isset($nivelEscolaridad)){
+                $nivelEscolaridad = "No respondío";
+            }
             $found = self::get($nivelEscolaridad);
             if(!isset($found)){
                 $pro = new NivelEscolaridad();

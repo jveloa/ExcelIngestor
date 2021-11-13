@@ -7,6 +7,9 @@
     
     class ProvinciaService{
         static function create($provinvia){
+            if(!isset($provinvia)){
+                $provinvia = "No respondío";
+            }
             $found = self::get($provinvia);
             if(!isset($found)){
                 $pro = new Provincia();

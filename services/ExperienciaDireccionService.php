@@ -8,6 +8,9 @@
 
     class ExperienciaDireccionService{
         static function create($experiencia){
+            if(!isset($experiencia)){
+                $experiencia = "No respondío";
+            }
             $found = self::get($experiencia);
             if(!isset($found)){
                 $pro = new ExperienciaDireccion();

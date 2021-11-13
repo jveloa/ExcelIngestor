@@ -6,6 +6,9 @@
 
     class IngresoService{
         static function create($ingreso){
+            if(!isset($ingreso)){
+                $ingreso = "No respondío";
+            }
             $found = self::get($ingreso);
             if (!isset($found)){
                 $pro = new Ingreso();
