@@ -8,6 +8,9 @@
 
     class ConvivenciaService{
         static function create($convivencia){
+            if(!isset($convicencia)){
+                $convivencia = "No respondío";
+            }
             $found = self::get($convivencia);
             if(!isset($found)){
                 $pro = new Convivencia();

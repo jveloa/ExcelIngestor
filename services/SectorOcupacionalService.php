@@ -8,6 +8,9 @@
 
     class SectorOcupacionalService{
         static function create($sectorOcupacional){
+            if(!isset($sectorOcupacional)){
+                $sectorOcupacional = "No respondío";
+            }
             $found = self::get($sectorOcupacional);
             if(!isset($found)){
                 $pro = new SectorOcupacional();

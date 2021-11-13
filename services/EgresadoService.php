@@ -8,6 +8,9 @@
 
     class EgresadoService{
         static function create($egresado){
+            if(!isset($egresado)){
+                $egresado = "No respondío";
+            }
             $found = self::get($egresado);
             if(!isset($found)){
                 $pro = new EgresadoDe();

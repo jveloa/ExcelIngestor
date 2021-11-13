@@ -8,6 +8,9 @@
 
     class DatoMilitarService{
         static function create($datoMilitar){
+            if(!isset($datoMilitar)){
+                $datoMilitar = "No respondío";
+            }
             $found = self::get($datoMilitar);
             if (!isset($found)){
                 $pro = new DatoMilitar();

@@ -8,6 +8,9 @@
 
     class RespDeporteArteService{
         static function create($respuesta){
+            if(!isset($respuesta)){
+                $respuesta = "No respondío";
+            }
             $found = self::get($respuesta);
             if (!isset($found)){
                 $pro = new RespDeporteArte();

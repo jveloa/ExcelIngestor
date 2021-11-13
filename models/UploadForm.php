@@ -4,6 +4,7 @@
     
     use app\services\ArteService;
     use app\services\ConvivenciaService;
+    use app\services\CursoService;
     use app\services\DatoMilitarService;
     use app\services\DependenciaEconService;
     use app\services\DeporteService;
@@ -30,25 +31,39 @@
 
 
     class UploadForm extends Model{
-        public $file;
+        public $archivo;
+        public $curso;
     
         public function rules(){
             return [
                 [
-                    ['file'],
+                    ['archivo'],
                     'file',
                     'skipOnEmpty' => false,
                     'extensions'  => 'xls,xlsx'
                 ],
+                [
+                    ['curso'],
+                    'number'
+                ],
+                [
+                    ['curso'],
+                    'required'
+                ],
             ];
         }
-        
+    
         public function attributeLabels(){
-            return ['file' => 'subir archivo '];
+            return [
+                'archivo' => 'Seleccionar archivo',
+                'curso' => 'Introducir curso'
+                ]
+        
+            ;
         }
         
         public function upload(){
-            $file = UploadedFile::getInstance($this, 'file');
+            $file = UploadedFile::getInstance($this, 'archivo');
             
             if ($this->rules()){
                 $tmp_file = $file->baseName . '.' . $file->extension;
@@ -67,10 +82,10 @@
         }
         
         public function readExcel(){
-            $reader = new Xlsx();
-            $spreadSheet = $reader->load('upload/' . 'Files/' . $this->file->name);
-            $sheet = $spreadSheet->getSheet(1);
-            $data = [
+            $reader      = new Xlsx();
+            $spreadSheet = $reader->load('upload/' . 'Files/' . $this->archivo->name);
+            $sheet       = $spreadSheet->getSheet(1);
+            $data        = [
     
                 //DATOS GENERALES
                 'nombre'            => $sheet->getCell("B3")->getValue(),
@@ -239,10 +254,10 @@
         }
     
         public function deleteExcel(){
-            unlink('upload/' . 'Files/' . $this->file->name);
+            unlink('upload/' . 'Files/' . $this->archivo->name);
         }
     
-        public function inputExcelDB($data){
+        public function inputExcelDB($data, $curso){
             $trans = Yii::$app->db->beginTransaction();
             try{
                 //tabla estudiante y todas las tablas que tienen llave foranea en estudiante
@@ -303,6 +318,8 @@
                 $idLengProgramacion       = RespPreguntasMasService::create($data['lengProgra']);
                 $idDispPc                 = RespPreguntasMasService::create($data['Computadora']);
                 $idEspacioEstudiar        = RespPreguntasMasService::create($data['espacioEstudio']);
+                $idCurso                  = CursoService::create($curso);
+                
                 $dataEstudiante           = [
                     'idMunicipio'              => $idMunicipio,
                     'idEgresado'               => $idEgresado,
@@ -360,10 +377,11 @@
                     'idLengProgramacion'       => $idLengProgramacion,
                     'idDispPc'                 => $idDispPc,
                     'idEspacioEstudiar'        => $idEspacioEstudiar,
+                    'idCurso'                  => $idCurso,
                 ];
         
                 $idEstudiante = EstudianteService::createEstudiante($dataEstudiante, $data);
-                $listaDeporte =explode(",", $data['deportes']);
+                 $listaDeporte =explode(",", $data['deportes']);
                 $listaArte = explode(",",$data['artes']);
                 foreach ($listaDeporte as $deporte){
                     if($deporte != ""){
@@ -379,11 +397,10 @@
                 }
                 
                 $trans->commit();
-                
+                Yii::$app->session->setFlash('success', 'Ha sido introducido correctamente');
             }catch (\Exception $e){
                 $trans->rollBack();
-                print_r($e);
-                throw $e;
+                Yii::$app->session->setFlash('error', 'Ha ocurrido un error');
             }
             
             

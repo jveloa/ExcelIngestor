@@ -8,6 +8,9 @@
 
     class EstadoCivilService{
         static function create($estado){
+            if(!isset($estado)){
+                $estado = "No respondío";
+            }
             $found = self::get($estado);
             if(!isset($found)){
                 $pro = new EstadoCivil();

@@ -1,7 +1,8 @@
 
 
 <?php
-
+    /* @var $this \yii\web\View */
+    /* @var $mymodel \app\models\ViaIngresoForm */
 use app\models\db\Estudiante;
 use app\models\db\egresadoDe;
 use yii\helpers\ArrayHelper;

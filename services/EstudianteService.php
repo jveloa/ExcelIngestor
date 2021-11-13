@@ -110,6 +110,7 @@
                 $est->id_lenguajes_programacion   = $dataEstdiante['idLengProgramacion'];
                 $est->id_dispo_copumtadora        = $dataEstdiante['idDispPc'];
                 $est->id_espacio_estudiar         = $dataEstdiante['idEspacioEstudiar'];
+                $est->id_curso                    = $dataEstdiante['idCurso'];
                 $est->save(false);
                 return self::get($data['nombre'])['carne'];
             }
