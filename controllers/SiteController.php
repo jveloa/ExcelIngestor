@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UploadForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 
 class SiteController extends Controller
@@ -51,21 +53,10 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+   
+  
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
+   
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -83,34 +74,34 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
+
+    
     public function actionLogout()
     {
         Yii::$app->user->logout();
 
         return $this->goHome();
     }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
+    
+    public function actionIndex()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        $model = new UploadForm();
+        
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            $model->archivo = UploadedFile::getInstance($model, 'archivo');
+            $curso = $model->curso;
+            if (!$model->upload()) {
+                print "error";
+            }
+            $data = $model->readExcel();
+            $model->deleteExcel();
+            $model->inputExcelDB($data,$curso);
+            
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+        
+        return $this->render('../upload/excel', ['file' => $model]);
+        
     }
 
    

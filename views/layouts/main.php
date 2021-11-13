@@ -30,7 +30,7 @@ $this->beginPage()
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => 'Reportes del diagnóstico a estudiantes de nuevo ingreso ',
+        'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso ',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
@@ -39,7 +39,7 @@ $this->beginPage()
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Inicio', 'url' => ['/site/index']],
+            ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
 
             [
