@@ -30,7 +30,7 @@ $this->beginPage()
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => 'Facultad de Infomática ',
+        'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso ',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
@@ -46,11 +46,13 @@ $this->beginPage()
                     'label'=>'Reportes',
                     'items'=>[
 
-                                ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
-                                ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
-                                ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
-                                ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
-                                ['label' => 'Reporte V1 ', 'url'=> ['/report/estudiantes_notas_indice']],
+                        ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
+                        ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
+                        ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
+                        ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
+                        ['label' => 'Listado de estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiantes_notas_indice']],
+
+
                     ],
             ],
 

@@ -15,8 +15,8 @@ class EstudiantesNotasIndiceForm extends Model
     public function rules()
     {
         return [
-            [['indiceChk'], 'boolean'],
-            [['notasChk'], 'boolean'],
+            [['indiceChk'], 'number'],
+            [['notasChk'], 'number'],
         ];
     }
 

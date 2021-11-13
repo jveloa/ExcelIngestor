@@ -36,8 +36,8 @@ $listaEgresado = \yii\helpers\BaseArrayHelper::map($egresadoData, 'id', 'lugar')
 
     'columns' => [
         'tipo',
-        'maximo',
-        'minimo',
+        'máximo',
+        'mínimo',
         'promedio',
 
     ],

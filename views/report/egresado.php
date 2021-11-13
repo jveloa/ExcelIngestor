@@ -35,7 +35,7 @@ $listaEgresado = \yii\helpers\BaseArrayHelper::map($egresadoData, 'id', 'lugar')
 
 
 <div class="row">
-    <div class="col">Por estudiante por lugar de ingreso seleccionado</div>
+    <div class="col">Estudiantes por lugar de egreso seleccionado :</div>
 </div>
 <div id="feedback">
     <?php if ($seleccionEgresado != "")

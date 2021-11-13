@@ -18,7 +18,7 @@
         public function attributeLabels()
         {
             return [
-                'idIngreso' => 'Lista de lugares de las vías de ingreso'
+                'idIngreso' => 'Lugar de ingreso'
             ];
         }
     }

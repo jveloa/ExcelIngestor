@@ -9,14 +9,16 @@ use \yii\bootstrap4\ToggleButtonGroup;
 
 ?>
 
-
+<div class="row">
+    <div class="col">Listado de estudiantes por :</div>
+</div>
 <?php
 $form1 = ActiveForm::begin();
 ?>
 <div class="row">
     <div class="col-3">
         <?= $form1->field($mymodel,'indiceChk')->checkbox([
-            'label' => Yii::t('app', 'Indice academico '),
+            'label' => Yii::t('app', 'Índice académico '),
 
             'onchange'=>'this.form.submit()']);
         ?>
@@ -27,31 +29,52 @@ $form1 = ActiveForm::begin();
 
 <div class="row">
     <div class="col-3">
-        <?= $form1->field($mymodel,'indiceChk')->checkbox([
+        <?= $form1->field($mymodel,'notasChk')->checkbox([
             'label' => Yii::t('app', 'Notas de pruebas de ingreso'),
 
             'onchange'=>'this.form.submit()']);
+
         ?>
     </div>
 
 
 </div>
 
-
-<div class="form-group ">
-    <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
-</div>
-
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'pager'=>[
+            'firstPageLabel'=>'Primera',
+            'lastPageLabel'=>'Última'
+],
     'id'=>'gv',
 
     'columns' => [
         'nombre',
-        'Índice',
-        'matemática',
-        'español',
-        'historia',
+        array(
+                'label'=>'Índice',
+                'attribute'=>'Índice',
+                'visible'=>$mymodel->indiceChk,
+
+        ),
+        array(
+            'label'=>'Matemática',
+            'attribute'=>'matemática',
+            'visible'=> $mymodel->notasChk,
+
+        ),
+        array(
+            'label'=>'Español',
+            'attribute'=>'español',
+            'visible'=> $mymodel->notasChk,
+
+        ),
+        array(
+            'label'=>'Historia',
+            'attribute'=>'historia',
+            'visible'=> $mymodel->notasChk,
+
+        ),
+
 
     ],
 ]);?>

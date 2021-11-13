@@ -9,13 +9,20 @@ use \yii\bootstrap4\ToggleButtonGroup;
 
 ?>
 
+<div class="row">
+    <div class="col">Estudiantes por índice y notas de ingreso :</div>
+</div>
+
 <?php
 $form1 = ActiveForm::begin();
 ?>
+
+
+
 <div class="row">
 <div class="col-3">
 <?= $form1->field($mymodel,'indiceChk')->checkbox([
-    'label' => Yii::t('app', 'Indice academico >='),
+    'label' => Yii::t('app', 'Índice académico >='),
 
         'onchange'=>'this.form.submit()']);
         ?>
@@ -110,23 +117,6 @@ $form1 = ActiveForm::begin();
 
 
 <?php $form1 = ActiveForm::end();?>
-<?php  echo "la variable es";   ?>
-<?php  echo $seleccionEgresado[0];   ?>
-<?php  echo "la variable es";   ?>
-<?php  echo $seleccionEgresado[1];   ?>
-<?php  echo "la variable es";   ?>
-<?php  echo $seleccionEgresado[2];   ?>
-<?php  echo "la variable es";   ?>
-<?php  echo $seleccionEgresado[3];   ?>
-<?php  echo "la variable es:\n";   ?>
-<?php  echo $seleccionEgresado[4];   ?>
-<?php
-echo $sql;
 
-?>
-<?php
-echo $condicion;
-
-?>
 
 

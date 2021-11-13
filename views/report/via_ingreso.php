@@ -32,6 +32,12 @@
 <?php $form1 = ActiveForm::end(); ?>
 
 
+
+<div class="row">
+    <div class="col">Estudiantes por lugar de ingreso seleccionado :</div>
+</div>
+
+
 <div class="row">
     <div class="col">Nombre y apellidos</div>
 </div>
