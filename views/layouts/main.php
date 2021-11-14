@@ -40,7 +40,7 @@ $this->beginPage()
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Procesar Excel', 'url'=> ['/upload/excel']],
+
 
             [
                     'label'=>'Reportes',
