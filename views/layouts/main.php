@@ -30,7 +30,7 @@ $this->beginPage()
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso ',
+        'brandLabel' => 'Sistema de diagnóstico',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
