@@ -17,9 +17,9 @@
 
 <div class="form-group flex-column col-xl-6 ">
     <div class="p-2 m-4 ">
-        <?= $form->field($model, 'archivo',)->fileInput() ?>
         <?= $form->field($model, 'curso')->textInput() ?>
-        <?= Html::submitButton('Enviar', [
+        <?= $form->field($model, 'archivo',)->fileInput() ?>
+        <?= Html::submitButton('Importar', [
             'class' => 'btn btn-primary',
             'name'  => 'send-button'
         ]) ?>
