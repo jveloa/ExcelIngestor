@@ -52,7 +52,7 @@ $this->beginPage()
                         ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
                         ['label' => 'Listado de estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiantes_notas_indice']],
                         ['label' => 'Datos de ingreso por curso seleccionado ', 'url'=> ['/report/estadisticas_curso']],
-
+                        ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']]
 
                     ],
             ],

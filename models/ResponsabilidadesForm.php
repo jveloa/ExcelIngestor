@@ -8,19 +8,29 @@
 
     class ResponsabilidadesForm extends Model{
         public $idResponsabilidades;
+        public $idCurso;
     
         public function rules(){
             return [
                 [
                     ['idResponsabilidades'],
-                    'number'
+                    'number',
+                ],
+                [
+                    ['idCurso'],
+                    'number',
+                ],
+                [
+                    ['idCurso'],
+                    'required'
                 ],
             ];
         }
     
         public function attributeLabels(){
             return [
-                'idResponsabilidades' => 'Nivel de interés de pertenecer a organizaciones'
+                'idResponsabilidades' => 'Nivel de interés de pertenecer a organizaciones',
+                'idCurso'             => 'Curso'
             ];
         }
     }

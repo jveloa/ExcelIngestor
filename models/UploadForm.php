@@ -43,7 +43,9 @@
                 ],
                 [
                     ['curso'],
-                    'number'
+                    'number',
+                    'max' => 2050,
+                    'min' => 1999
                 ],
                 [
                     ['curso'],
