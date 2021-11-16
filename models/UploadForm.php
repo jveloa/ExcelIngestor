@@ -13,7 +13,6 @@
     use app\services\EstudianteArteService;
     use app\services\EstudianteDeporteService;
     use app\services\EstudianteService;
-    use app\services\ExperienciaDireccionService;
     use app\services\IngresoService;
     use app\services\IntegracionPoliticaService;
     use app\services\MunicipioSevices;

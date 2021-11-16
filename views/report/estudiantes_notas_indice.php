@@ -19,7 +19,6 @@ $form1 = ActiveForm::begin();
     <div class="col-3">
         <?= $form1->field($mymodel,'indiceChk')->checkbox([
             'label' => Yii::t('app', 'Índice académico '),
-
             'onchange'=>'this.form.submit()']);
         ?>
     </div>
@@ -31,9 +30,7 @@ $form1 = ActiveForm::begin();
     <div class="col-3">
         <?= $form1->field($mymodel,'notasChk')->checkbox([
             'label' => Yii::t('app', 'Notas de pruebas de ingreso'),
-
             'onchange'=>'this.form.submit()']);
-
         ?>
     </div>
 
