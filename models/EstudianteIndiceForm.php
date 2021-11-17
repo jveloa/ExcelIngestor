@@ -22,6 +22,8 @@ class EstudianteIndiceForm extends Model
 
     public $habilitarChk;
 
+    public $cursoid;
+
     public function rules()
     {
         return [
@@ -38,6 +40,8 @@ class EstudianteIndiceForm extends Model
             [['historiaText'], 'number','max'=>100,'min'=>0],
 
             [['habilitarChk'], 'boolean'],
+
+            [['cursoid'], 'number'],
         ];
     }
     public function attributeLabels()
@@ -46,7 +50,8 @@ class EstudianteIndiceForm extends Model
             'indiceText' => 'Indice academico',
             'espanolText' => 'Nota de Español',
             'matematicaText' => 'Nota de Matemática',
-            'historiaText' => 'Nota de Historia'
+            'historiaText' => 'Nota de Historia',
+            'cursoid' => 'Curso académico',
 
         ];
     }

@@ -8,17 +8,20 @@
 
     class ViaIngresoForm extends Model{
         public $idIngreso;
+        public $cursoid;
     
         public function rules()
         {
             return [
                 [['idIngreso'], 'number'],
+                [['cursoid'], 'number'],
             ];
         }
         public function attributeLabels()
         {
             return [
-                'idIngreso' => 'Lugar de ingreso'
+                'idIngreso' => 'Vía de ingreso',
+                'cursoid' => 'Curso académico'
             ];
         }
     }

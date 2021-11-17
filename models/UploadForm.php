@@ -56,8 +56,8 @@
     
         public function attributeLabels(){
             return [
-                'archivo' => 'Seleccionar archivo',
-                'curso' => 'Introducir curso'
+                'archivo' => 'Seleccionar fichero Excel a importar',
+                'curso' => 'Introducir curso de ingreso del estudiante'
                 ]
         
             ;

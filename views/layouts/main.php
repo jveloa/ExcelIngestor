@@ -30,7 +30,7 @@ $this->beginPage()
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => 'Sistema de diagnóstico',
+        'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
@@ -39,7 +39,7 @@ $this->beginPage()
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Inicio', 'url' => ['/site/index']],
 
 
             [
@@ -60,7 +60,7 @@ $this->beginPage()
 
 
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Usuario', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                  .Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])

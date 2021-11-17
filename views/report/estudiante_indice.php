@@ -15,9 +15,18 @@ use \yii\bootstrap4\ToggleButtonGroup;
 
 <?php
 $form1 = ActiveForm::begin();
+
+$cursoData = app\models\db\Curso::find()->all();
+$listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
+
 ?>
 
-
+<div class="p-2" style="width: 300px " >
+    <?= $form1->field($mymodel, 'cursoid')->dropdownList($listaCursos,
+        ['prompt'=>'Seleccione',
+            'options'=>[$seleccionCurso=>['selected'=>true]]]);
+    ?>
+</div>
 
 <div class="row">
 <div class="col-3">
