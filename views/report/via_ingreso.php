@@ -3,13 +3,8 @@
     use app\models\db\Estudiante;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
-
-
-?>
-
-
-
-<?php
+    
+    
     /* @var $this \yii\web\View */
     /* @var $model \app\models\ViaIngresoForm */
     
@@ -59,11 +54,10 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
     } ?>
     <?php foreach ($estudiante as $est){ ?>
         <div class="col"><?php echo $est->nombre ?></div>
-        
-        
-        <?php
-        
-    } ?>
+
+
+
+    <?php } ?>
     <hr>
     <div class="col-lg-offset-10 col-lg-11">
         Total de estudiantes <?php echo $cantEstudiante; ?>

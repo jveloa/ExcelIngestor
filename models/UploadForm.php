@@ -13,7 +13,6 @@
     use app\services\EstudianteArteService;
     use app\services\EstudianteDeporteService;
     use app\services\EstudianteService;
-    use app\services\ExperienciaDireccionService;
     use app\services\IngresoService;
     use app\services\IntegracionPoliticaService;
     use app\services\MunicipioSevices;
@@ -44,7 +43,9 @@
                 ],
                 [
                     ['curso'],
-                    'number'
+                    'number',
+                    'max' => 2050,
+                    'min' => 1999
                 ],
                 [
                     ['curso'],
