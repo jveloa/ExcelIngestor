@@ -70,7 +70,7 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
     }  ?><hr>
     <div class="col-lg-offset-10 col-lg-11">
-        Total de estudiantes <?php echo $cantEstudiante; ?>
+        Total de estudiantes :<?php echo $cantEstudiante; ?>
     </div>
 
 </div>
