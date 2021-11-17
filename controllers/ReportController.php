@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\db\RespSobreFuturo;
+use app\models\DeportesForm;
 use app\models\EgresadoDeSearch;
 use app\models\EgresadoForm;
 use app\models\EgresadoNotasForm;
@@ -294,6 +295,14 @@ class ReportController extends Controller
         }
         return $this->render('responsabilidades', ['model' => $model, 'lista' => $lista]);
         
+    }
+    
+    public function actionEstudiantes_deportes(){
+        $model = new DeportesForm();
+        if ($model->load(Yii::$app->request->post())) {
+            return $this->render('estudiantes_deporte', ['model' => $model]);
+        }
+        return $this->render('estudiantes_deporte', ['model' => $model]);
     }
     
     
