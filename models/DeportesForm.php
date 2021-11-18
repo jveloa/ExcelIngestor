@@ -15,7 +15,7 @@
         public function rules(){
             return [
                 [
-                    ['idDeporte'],
+                    ['idDeporte','idCurso'],
                     'required'
                 ],
                 [
