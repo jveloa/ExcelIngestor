@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ArtesForm;
 use app\models\db\RespSobreFuturo;
 use app\models\DeportesForm;
 use app\models\EgresadoDeSearch;
@@ -342,5 +343,11 @@ class ReportController extends Controller
         return $this->render('estudiantes_deporte', ['model' => $model]);
     }
     
-    
+    public function actionEstudiantes_artes(){
+        $model = new ArtesForm();
+        if ($model->load(Yii::$app->request->post())) {
+            return $this->render('estudiantes_artes', ['model' => $model]);
+        }
+        return $this->render('estudiantes_artes', ['model' => $model]);
+    }
 }
