@@ -51,6 +51,10 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 <div class="row">
     <div class="col">Estudiantes por lugar de egreso seleccionado :</div>
 </div>
+
+<div class="row">
+    <div class="col">Nombre y apellidos</div>
+</div>
 <div id="feedback">
     <?php if ($seleccionEgresado != "")
     {

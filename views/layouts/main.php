@@ -53,7 +53,8 @@ $this->beginPage()
                         ['label' => 'Listado de estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiantes_notas_indice']],
                         ['label' => 'Datos de ingreso por curso seleccionado ', 'url'=> ['/report/estadisticas_curso']],
                         ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
-                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']]
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes que no cuentan con computadora', 'url'=> ['/report/estudiantes_no_computadora']]
 
                     ],
             ],
