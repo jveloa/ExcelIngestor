@@ -15,7 +15,6 @@
             return [
                 [['idIngreso'], 'number'],
                 [['cursoid'], 'number'],
-                [['idIngreso','cursoid'],'required'],
             ];
         }
         public function attributeLabels()

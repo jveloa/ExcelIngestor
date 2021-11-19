@@ -7,7 +7,7 @@
     use app\models\db\Estudiante;
     use app\models\db\EstudianteDeporte;
     use yii\base\Model;
-
+    
     class DeportesForm extends Model{
         public $idDeporte;
         public $idCurso;
@@ -15,17 +15,15 @@
         public function rules(){
             return [
                 [
-                    ['idDeporte', 'idCurso'],
+                    ['idDeporte','idCurso'],
                     'required'
                 ],
                 [
-                    ['idDeporte'],
+                    [
+                        'idCurso',
+                        'idDeporte'
+                    ],
                     'number'
-                ],
-                [
-                    ['idCurso'],
-                    'number',
-                    
                 ],
             ];
         }
