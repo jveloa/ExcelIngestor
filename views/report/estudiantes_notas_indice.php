@@ -54,9 +54,16 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
     'id'=>'gv',
 
     'columns' => [
-        'nombre',
+
         array(
-                'label'=>'Índice',
+            'label'=>'Nombre y apellidos',
+            'attribute'=>'nombre',
+
+
+        ),
+
+        array(
+                'label'=>'Índice académico',
                 'attribute'=>'Índice',
                 'visible'=>$mymodel->indiceChk,
 

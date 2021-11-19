@@ -11,6 +11,7 @@ use app\models\EgresadoNotasForm;
 use app\models\EstadisticasCursoForm;
 use app\models\EstudianteIndiceForm;
 use app\models\EstudiantesCursoIndiceNotasForm;
+use app\models\EstudiantesNoComputadoraForm;
 use app\models\EstudiantesNotasIndiceForm;
 use app\models\ResponsabilidadesForm;
 use app\models\ViaIngresoForm;
@@ -342,6 +343,45 @@ class ReportController extends Controller
         }
         return $this->render('estudiantes_deporte', ['model' => $model]);
     }
+
+    public function actionEstudiantes_no_computadora()
+    {
+        $model = new EstudiantesNoComputadoraForm();
+
+
+        if ($model->load(Yii::$app->request->post())) {
+            $valorRespuesta = $model->cursoid;
+            //condicion si hay seleccion
+                $sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
+
+
+                $dataProvider = new SqlDataProvider([
+                    'sql'    => $sql,
+                    'params' => [':cursoid' => $valorRespuesta],
+
+                ]);
+
+
+            return $this->render('estudiantes_no_computadora', [
+                'seleccionEgresado' => $valorRespuesta,
+                'dataProvider'      => $dataProvider,
+                'mymodel'           => $model
+            ]);
+         }
+        $sql = "SELECT nombre AS Nombre FROM estudiante";
+
+        $dataProvider = new SqlDataProvider([
+            'sql' => $sql,
+
+        ]);
+        return $this->render('estudiantes_no_computadora', [
+            'seleccionEgresado' => '',
+            'dataProvider'      => $dataProvider,
+            'mymodel'           => $model
+        ]);
+        //cuando no hay variable de post
+    }
+    
     
     public function actionEstudiantes_artes(){
         $model = new ArtesForm();
