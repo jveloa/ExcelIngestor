@@ -40,12 +40,10 @@ $this->beginPage()
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-
-
+            
             [
                     'label'=>'Reportes',
                     'items'=>[
-
                         ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
                         ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
                         ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
@@ -57,7 +55,11 @@ $this->beginPage()
                         ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
                         ['label' => 'Estudiantes por manifestaciones artísticas que práctican', 'url'=> ['/report/estudiantes_artes']],
                         ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
-                        ['label' => 'Estudiantes que no cuentan con computadora', 'url'=> ['/report/estudiantes_no_computadora']]
+                        ['label' => 'Estudiantes que no cuentan con computadora', 'url'=> ['/report/estudiantes_no_computadora']],
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes por manifestaciones artísticas que práctican', 'url'=> ['/report/estudiantes_artes']],
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes que no cuentan con computadora', 'url'=> ['/report/estudiantes_no_computadora']],
 
                     ],
             ],
