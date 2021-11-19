@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ArtesForm;
 use app\models\db\RespSobreFuturo;
 use app\models\DeportesForm;
 use app\models\EgresadoDeSearch;
@@ -23,7 +24,7 @@ use \yii\helpers\BaseArrayHelper;
 
 class ReportController extends Controller
 {
-
+    ///Ferrer
     public function actionEgresado()
     {
         $model = new EgresadoForm;
@@ -47,17 +48,7 @@ class ReportController extends Controller
                 ]);
 
     }
-
-    public function actionVia_ingreso()
-    {
-        $model = new ViaIngresoForm();
-        if ($model->load(Yii::$app->request->post())) {
-            $valorCurso= $model->cursoid;
-            return $this->render('via_ingreso', ['seleccionCurso' => $valorCurso,'model' => $model]);
-        }
-        return $this->render('via_ingreso', ['seleccionCurso' => "",'model' => $model]);
-    }
-
+    
     public function actionEgresadonotas()
     {
         $model1 = new EgresadoNotasForm;
@@ -321,6 +312,56 @@ class ReportController extends Controller
         //cuando no hay variable de post
     }
     
+    public function actionEstudiantes_no_computadora()
+    {
+        $model = new EstudiantesNoComputadoraForm();
+        
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $valorRespuesta = $model->cursoid;
+            //condicion si hay seleccion
+            $sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
+            
+            
+            $dataProvider = new SqlDataProvider([
+                'sql'    => $sql,
+                'params' => [':cursoid' => $valorRespuesta],
+            
+            ]);
+            
+            
+            return $this->render('estudiantes_no_computadora', [
+                'seleccionEgresado' => $valorRespuesta,
+                'dataProvider'      => $dataProvider,
+                'mymodel'           => $model
+            ]);
+        }
+        $sql = "SELECT nombre AS Nombre FROM estudiante";
+        
+        $dataProvider = new SqlDataProvider([
+            'sql' => $sql,
+        
+        ]);
+        return $this->render('estudiantes_no_computadora', [
+            'seleccionEgresado' => '',
+            'dataProvider'      => $dataProvider,
+            'mymodel'           => $model
+        ]);
+        //cuando no hay variable de post
+    }
+    
+    
+    ///Junior
+    public function actionVia_ingreso()
+    {
+        $model = new ViaIngresoForm();
+        if ($model->load(Yii::$app->request->post())) {
+            $valorCurso= $model->cursoid;
+            return $this->render('via_ingreso', ['seleccionCurso' => $valorCurso,'model' => $model]);
+        }
+        return $this->render('via_ingreso', ['seleccionCurso' => "",'model' => $model]);
+    }
+    
     public function actionResponsabilidades(){
         $model      = new ResponsabilidadesForm();
         $respFuturo = RespSobreFuturo::find()->orWhere([
@@ -342,43 +383,13 @@ class ReportController extends Controller
         }
         return $this->render('estudiantes_deporte', ['model' => $model]);
     }
-
-    public function actionEstudiantes_no_computadora()
-    {
-        $model = new EstudiantesNoComputadoraForm();
-
-
+    
+    public function actionEstudiantes_artes(){
+        $model = new ArtesForm();
         if ($model->load(Yii::$app->request->post())) {
-            $valorRespuesta = $model->cursoid;
-            //condicion si hay seleccion
-                $sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
-
-
-                $dataProvider = new SqlDataProvider([
-                    'sql'    => $sql,
-                    'params' => [':cursoid' => $valorRespuesta],
-
-                ]);
-
-
-            return $this->render('estudiantes_no_computadora', [
-                'seleccionEgresado' => $valorRespuesta,
-                'dataProvider'      => $dataProvider,
-                'mymodel'           => $model
-            ]);
-         }
-        $sql = "SELECT nombre AS Nombre FROM estudiante";
-
-        $dataProvider = new SqlDataProvider([
-            'sql' => $sql,
-
-        ]);
-        return $this->render('estudiantes_no_computadora', [
-            'seleccionEgresado' => '',
-            'dataProvider'      => $dataProvider,
-            'mymodel'           => $model
-        ]);
-        //cuando no hay variable de post
+            return $this->render('estudiantes_artes', ['model' => $model]);
+        }
+        return $this->render('estudiantes_artes', ['model' => $model]);
     }
     
 }
