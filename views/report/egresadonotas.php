@@ -46,6 +46,7 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
      'id'=>'gv',
 
     'columns' => [
+
         'tipo',
         'máximo',
         'mínimo',

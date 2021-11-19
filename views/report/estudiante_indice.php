@@ -113,8 +113,20 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
     'id'=>'gv',
 
     'columns' => [
-        'nombre',
-        'Índice',
+        array(
+            'label'=>'Nombre y apellidos',
+            'attribute'=>'nombre',
+
+
+        ),
+        array(
+            'label'=>'Índice académico',
+            'attribute'=>'Índice',
+
+
+        ),
+
+
         'matemática',
         'español',
         'historia',
