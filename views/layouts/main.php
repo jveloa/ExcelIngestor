@@ -27,7 +27,7 @@ $this->beginPage()
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<header>
+<header class="p-4 flex-column">
     <?php
     NavBar::begin([
         'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso',
@@ -40,12 +40,10 @@ $this->beginPage()
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-
-
+            
             [
                     'label'=>'Reportes',
                     'items'=>[
-
                         ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
                         ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
                         ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
@@ -53,7 +51,9 @@ $this->beginPage()
                         ['label' => 'Listado de estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiantes_notas_indice']],
                         ['label' => 'Datos de ingreso por curso seleccionado ', 'url'=> ['/report/estadisticas_curso']],
                         ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
-                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']]
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes por manifestaciones artísticas que práctican', 'url'=> ['/report/estudiantes_artes']]
 
                     ],
             ],
@@ -91,7 +91,7 @@ $this->beginPage()
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="float-left">&copy; Facultad de informática <?= date('Y') ?></p>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
