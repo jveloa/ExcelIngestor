@@ -16,13 +16,13 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 ?>
 
 <div class="row">
-    <div class="col">Estudiantes sin computadora por</div>
+    <div class="col">Por ciento de formas de estudio por : </div>
 </div>
 
 <div class="p-2" style="width: 300px " >
     <?= $form1->field($mymodel, 'cursoid')->dropdownList($listaCurso,
         ['prompt'=>'Seleccione',
-        'options'=>[$seleccionEgresado=>['selected'=>true]]]);
+            'options'=>[$seleccionEgresado=>['selected'=>true]]]);
     ?>
 </div>
 
@@ -40,15 +40,40 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
     'columns' => [
 
         array(
-            'label'=>'Nombre y apellidos',
-            'attribute'=>'nombre',
+            'label'=>'Formas de estudio',
+            'attribute'=>'tipo',
 
+        ),
+        array(
+            'label'=>'Mucho(%)',
+            'attribute'=>'mucho',
+
+        ),
+        array(
+            'label'=>'Un poco(%)',
+            'attribute'=>'poco',
+
+        ),
+        array(
+            'label'=>'Nunca(%)',
+            'attribute'=>'nunca',
+
+        ),
+        array(
+            'label'=>'No sé(%)',
+            'attribute'=>'no',
+
+        ),
+        array(
+            'label'=>'No respondio(%)',
+            'attribute'=>'ns',
 
         ),
 
 
     ],
 ]);?>
+
 
 
 
