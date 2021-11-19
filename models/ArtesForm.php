@@ -5,44 +5,49 @@
     
     
     use app\models\db\Estudiante;
-    use app\models\db\EstudianteDeporte;
+    use app\models\db\EstudianteArte;
     use yii\base\Model;
-
-    class DeportesForm extends Model{
-        public $idDeporte;
+    
+    class ArtesForm extends Model{
+        public $idArte;
         public $idCurso;
         
         public function rules(){
             return [
                 [
-                    ['idDeporte', 'idCurso'],
+                    [
+                        'idArte',
+                        'idCurso'
+                    ],
                     'required'
                 ],
                 [
-                    ['idDeporte'],
+                    [
+                        'idArte'
+                    ],
                     'number'
                 ],
                 [
                     ['idCurso'],
-                    'number',
-                    
+                    'number'
                 ],
+            
             ];
         }
         
         public function attributeLabels(){
             return [
-                'idDeporte' => 'Deportes',
-                'idCurso'   => 'Curso'
+                'idArte'  => 'Manifestaciones Artísticas',
+                'idCurso' => 'Curso'
             ];
         }
         
         public function getEstudiantes(){
             $lista = [];
-            if (isset($this->idDeporte)){
+            if (isset($this->idArte)){
                 $lista = Estudiante::find()
-                    ->innerJoin('estudiante_deporte', 'estudiante_deporte.id_estudiante = estudiante.carne')
-                    ->where(['estudiante_deporte.id_deporte' => $this->idDeporte])
+                    ->innerJoin('estudiante_arte', 'estudiante_arte.id_estudiante = estudiante.carne')
+                    ->where(['estudiante_arte.id_arte' => $this->idArte])
                     ->all();
             }
             return $lista;
@@ -50,8 +55,8 @@
         
         public function getCantEstudiantes(){
             $cant = 0;
-            if (isset($this->idDeporte)){
-                $cant = EstudianteDeporte::find()->where(['id_deporte' => $this->idDeporte])->count();
+            if (isset($this->idArte)){
+                $cant = EstudianteArte::find()->where(['id_arte' => $this->idArte])->count();
             }
             return $cant;
         }
