@@ -37,21 +37,30 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 <div class="form-group ">
     <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
 </div>
-<?php $form1 = ActiveForm::end();?>
+<?php $form1 = ActiveForm::end();
+
+if ($seleccionEgresado != "" && $seleccionCurso != "") {?>
+
+    <?=      GridView::widget([
+        'dataProvider' => $dataProvider,
+        'id' => 'gv',
+
+        'columns' => [
+
+            'tipo',
+            'máximo',
+            'mínimo',
+            'promedio',
+
+        ],
+    ]);
 
 
+}
+elseif (($seleccionEgresado == "" && $seleccionCurso != "") || ($seleccionEgresado != "" && $seleccionCurso == "")){
 
-<?= GridView::widget([
-    'dataProvider' => $dataProvider,
-     'id'=>'gv',
+    echo '<script>alert("Debe seleccionar ambos campos")</script>';
 
-    'columns' => [
 
-        'tipo',
-        'máximo',
-        'mínimo',
-        'promedio',
-
-    ],
-]);?>
+}?>
 
