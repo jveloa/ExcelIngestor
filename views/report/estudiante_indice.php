@@ -24,6 +24,7 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 <div class="p-2" style="width: 300px " >
     <?= $form1->field($mymodel, 'cursoid')->dropdownList($listaCursos,
         ['prompt'=>'Seleccione',
+             'onchange'=>'this.form.submit()',
             'options'=>[$seleccionCurso=>['selected'=>true]]]);
     ?>
 </div>
@@ -32,14 +33,15 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 <div class="col-3">
 <?= $form1->field($mymodel,'indiceChk')->checkbox([
     'label' => Yii::t('app', 'Índice académico >='),
-
+    'disabled'=>$seleccionEgresado[5],
         'onchange'=>'this.form.submit()']);
         ?>
 </div>
 
 <div class="col-3 ">
 
-<?= $form1->field($mymodel,'indiceText')->textInput(['disabled' =>$seleccionEgresado[0]])->label(false)?>
+<?= $form1->field($mymodel,'indiceText')->textInput([
+        'disabled' =>$seleccionEgresado[0]])->label(false)?>
 
 </div>
 </div>
@@ -48,7 +50,7 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 <div class="col-12">
     <?= $form1->field($mymodel,'habilitarChk')->checkbox([
         'label' => Yii::t('app', 'Notas de examen de ingreso'),
-
+        'disabled'=>$seleccionEgresado[5],
         'onchange'=>'this.form.submit()']);
     ?>
 
@@ -105,9 +107,11 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
 
 <div class="form-group ">
-    <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
+    <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary','disabled'=>$seleccionEgresado[5]]) ?>
 </div>
 
+
+<?php if (!$seleccionEgresado[5]) {?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'id'=>'gv',
@@ -132,7 +136,7 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
         'historia',
 
     ],
-]);?>
+]);}?>
 
 
 
