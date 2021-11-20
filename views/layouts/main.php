@@ -55,8 +55,8 @@ $this->beginPage()
                         ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
                         ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
                         ['label' => 'Estudiantes sin con computadora', 'url'=> ['/report/estudiantes_no_computadora']],
-                        ['label' => 'Por ciento de formas de estudios por curso', 'url'=> ['/report/estudiantes_formas_estudios']],
-                        ['label' => 'Por ciento de horas de estudios por curso', 'url'=> ['/report/estudiantes_horas_estudios']],
+                        ['label' => 'Por ciento de formas de estudios por curso académico', 'url'=> ['/report/estudiantes_formas_estudios']],
+                        ['label' => 'Por ciento de horas de estudios por curso académico', 'url'=> ['/report/estudiantes_horas_estudios']],
 
                     ],
             ],
