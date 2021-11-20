@@ -12,6 +12,7 @@ use app\models\EstadisticasCursoForm;
 use app\models\EstudianteIndiceForm;
 use app\models\EstudiantesCursoIndiceNotasForm;
 use app\models\EstudiantesFormasEstudiosForm;
+use app\models\EstudiantesHabitosForm;
 use app\models\EstudiantesHorasEstudiosForm;
 use app\models\EstudiantesNoComputadoraForm;
 use app\models\EstudiantesNotasIndiceForm;
@@ -522,6 +523,14 @@ class ReportController extends Controller
             return $this->render('estudiantes_artes', ['model' => $model]);
         }
         return $this->render('estudiantes_artes', ['model' => $model]);
+    }
+    
+    public function actionEstudiantes_habitos(){
+        $model = new EstudiantesHabitosForm();
+        if ($model->load(Yii::$app->request->post())) {
+            return $this->render('estudiantes_habitos', ['model' => $model]);
+        }
+        return $this->render('estudiantes_habitos', ['model' => $model]);
     }
 
 

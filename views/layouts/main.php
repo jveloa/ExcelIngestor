@@ -27,7 +27,7 @@ $this->beginPage()
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<header>
+<header class="p-4">
     <?php
     NavBar::begin([
         'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso',
@@ -37,15 +37,13 @@ $this->beginPage()
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
+        'options' => ['class' => 'navbar-nav '],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-
-
+            
             [
                     'label'=>'Reportes',
                     'items'=>[
-
                         /// Ferrer
                         ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
                         ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
@@ -61,12 +59,11 @@ $this->beginPage()
                         ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
                         ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
                         ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
-                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
-
+                        ['label' => 'Estudiantes por manifestaciones artísticas que práctican', 'url'=> ['/report/estudiantes_artes']],
+                        ['label' => 'Habitos de estudiante', 'url'=> ['/report/estudiantes_habitos']],
 
                     ],
             ],
-
 
             Yii::$app->user->isGuest ? (
                 ['label' => 'Usuario', 'url' => ['/site/login']]
@@ -81,8 +78,7 @@ $this->beginPage()
                 . '</li>'
             )
         ],
-
-
+        
     ]);
     NavBar::end();
     ?>
@@ -100,7 +96,7 @@ $this->beginPage()
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="float-left">&copy; Facultad de Informática <?= date('Y') ?></p>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
