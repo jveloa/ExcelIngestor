@@ -264,34 +264,48 @@ class ReportController extends Controller
         $model = new EstudiantesNotasIndiceForm();
 
         if ($model->load(Yii::$app->request->post())) {
-            $valorRespuesta= $model->cursoid;
-            $sql="SELECT nombre AS Nombre";
+            if ($model->cursoid > 0) {
+                $valorRespuesta = $model->cursoid;
+                $valorAux[] = false;
+                $valorAux[] = false;
 
-            if($model->indiceChk==1)
-                $sql= $sql." ,indice_academico AS Índice";
-            if ($model->notasChk==1)
-                $sql=$sql." ,nota_matematica AS matemática,nota_espannol AS Español,nota_historia AS Historia";
+                $sql = "SELECT nombre AS Nombre";
 
-            $sql= $sql." FROM estudiante WHERE id_curso=:cursoid";
+                if ($model->indiceChk == 1)
+                    $sql = $sql . " ,indice_academico AS Índice";
+                if ($model->notasChk == 1)
+                    $sql = $sql . " ,nota_matematica AS matemática,nota_espannol AS Español,nota_historia AS Historia";
 
-            $dataProvider = new SqlDataProvider([
-                'sql' => $sql,
-                'pagination'=>false,
-                'params' => [':cursoid' => $valorRespuesta],
-            ]);
-            return $this->render('estudiantes_notas_indice', [
-                'seleccionEgresado' => $valorRespuesta,
-                'dataProvider' => $dataProvider,
-                'mymodel' => $model
-            ]);
+                $sql = $sql . " FROM estudiante WHERE id_curso=:cursoid";
 
+                $dataProvider = new SqlDataProvider([
+                    'sql' => $sql,
+                    'pagination' => false,
+                    'params' => [':cursoid' => $valorRespuesta],
+                ]);
+                return $this->render('estudiantes_notas_indice', [
+                    'seleccionEgresado' => $valorRespuesta,
+                    'valor' => $valorAux,
+                    'dataProvider' => $dataProvider,
+                    'mymodel' => $model
+                ]);
+
+            }
+            else{
+                $model->indiceChk='';
+                $model->notasChk='';
+            }
         }
-
         // $sql="SELECT nombre AS Nombre,indice_academico AS Índice,nota_matematica AS Matemática,nota_espannol AS Español,nota_historia AS Historia FROM estudiante";
         $sql="SELECT '' AS Nombre,'' AS Índice,'' AS Matemática,'' AS Español,'' AS Historia";
 
-        //$model->indiceChk=1;
-        //$model->notasChk=1;
+        //$model->indiceChk=0;
+        //$model->notasChk=0;
+
+        $valorAux[]=true;
+        $valorAux[]=true;
+
+
 
 
         $dataProvider = new SqlDataProvider([
@@ -304,6 +318,7 @@ class ReportController extends Controller
 
         return $this->render('estudiantes_notas_indice', [
             'dataProvider' => $dataProvider,
+            'valor'=>$valorAux,
             'seleccionEgresado' =>"",
             'mymodel' => $model
         ]);
