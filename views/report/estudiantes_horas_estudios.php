@@ -16,23 +16,22 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 ?>
 
 <div class="row">
-    <div class="col">Por ciento de horas de estudio por :</div>
+    <div class="col">Por ciento de horas dedicadas al estudio por :</div>
 </div>
 
 <div class="p-2" style="width: 300px " >
     <?= $form1->field($mymodel, 'cursoid')->dropdownList($listaCurso,
         ['prompt'=>'Seleccione',
-            'options'=>[$seleccionEgresado=>['selected'=>true]]]);
+            'onchange'=>'this.form.submit()',
+            'options'=>[$seleccionCurso=>['selected'=>true]]]);
     ?>
 </div>
 
-<div class="form-group ">
-    <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
-</div>
+
 <?php $form1 = ActiveForm::end();?>
 
 
-
+<?php if ($seleccionCurso > 0) {?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'id'=>'gv',
@@ -54,7 +53,7 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
 
     ],
-]);?>
+]);}?>
 
 
 

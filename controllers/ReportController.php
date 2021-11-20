@@ -480,13 +480,14 @@ class ReportController extends Controller
 
             $dataProvider = new SqlDataProvider([
                 'sql'    => $sql,
+                'pagination'=>false,
                 'params' => [':cursoid' => $valorRespuesta],
 
             ]);
 
 
             return $this->render('estudiantes_horas_estudios', [
-                'seleccionEgresado' => $valorRespuesta,
+                'seleccionCurso' => $valorRespuesta,
                 'dataProvider'      => $dataProvider,
                 'mymodel'           => $model
             ]);
@@ -495,10 +496,11 @@ class ReportController extends Controller
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
         return $this->render('estudiantes_horas_estudios', [
-            'seleccionEgresado' => '',
+            'seleccionCurso' => '',
             'dataProvider'      => $dataProvider,
             'mymodel'           => $model
         ]);
