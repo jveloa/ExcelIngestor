@@ -361,33 +361,35 @@ class ReportController extends Controller
     {
         $model = new EstudiantesNoComputadoraForm();
 
+            if ($model->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post())) {
-            $valorRespuesta = $model->cursoid;
-            //condicion si hay seleccion
-            //$sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
-            $sql = "SELECT nombre AS Nombre FROM estudiante WHERE id_dispo_copumtadora=21 and id_curso=:cursoid ";
+                    $valorRespuesta = $model->cursoid;
+                    //condicion si hay seleccion
+                    //$sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
+                    $sql = "SELECT nombre AS Nombre FROM estudiante WHERE id_dispo_copumtadora=21 and id_curso=:cursoid ";
 
+                    $dataProvider = new SqlDataProvider([
+                        'sql'    => $sql,
+                        'pagination'=>false,
+                        'params' => [':cursoid' => $valorRespuesta],
 
-            $dataProvider = new SqlDataProvider([
-                'sql'    => $sql,
-                'params' => [':cursoid' => $valorRespuesta],
+                    ]);
 
-            ]);
+                    return $this->render('estudiantes_no_computadora', [
+                        'seleccionEgresado' => $valorRespuesta,
+                        'dataProvider'      => $dataProvider,
+                        'mymodel'           => $model
+                    ]);
+                }
 
-
-            return $this->render('estudiantes_no_computadora', [
-                'seleccionEgresado' => $valorRespuesta,
-                'dataProvider'      => $dataProvider,
-                'mymodel'           => $model
-            ]);
-        }
         $sql = "SELECT '' AS Nombre ";
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
+
         return $this->render('estudiantes_no_computadora', [
             'seleccionEgresado' => '',
             'dataProvider'      => $dataProvider,
@@ -395,6 +397,7 @@ class ReportController extends Controller
         ]);
         //cuando no hay variable de post
     }
+
     public function actionEstudiantes_formas_estudios()
     {
         $model = new EstudiantesFormasEstudiosForm();

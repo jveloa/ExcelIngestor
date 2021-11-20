@@ -16,23 +16,22 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 ?>
 
 <div class="row">
-    <div class="col">Estudiantes sin computadora por</div>
+    <div class="col">Estudiantes sin computadora por :</div>
 </div>
 
 <div class="p-2" style="width: 300px " >
     <?= $form1->field($mymodel, 'cursoid')->dropdownList($listaCurso,
         ['prompt'=>'Seleccione',
+        'onchange'=>'this.form.submit()',
         'options'=>[$seleccionEgresado=>['selected'=>true]]]);
     ?>
 </div>
 
-<div class="form-group ">
-    <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
-</div>
+
 <?php $form1 = ActiveForm::end();?>
 
 
-
+<?php if ($seleccionEgresado > 0) {?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'id'=>'gv',
@@ -48,7 +47,7 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
 
     ],
-]);?>
+]);}?>
 
 
 
