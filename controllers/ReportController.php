@@ -56,21 +56,13 @@ class ReportController extends Controller
     {
         $model1 = new EgresadoNotasForm;
 
-
+            $dataProvider = '';
 
         if ($model1->load(Yii::$app->request->post())) {
             $valorRespuesta = $model1->egresoid;
             $valorCurso= $model1->cursoid;
 
-            if ($valorRespuesta == "") {
-                //Cuando no hay seleccion
-                $sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante";
-
-                $dataProvider = new SqlDataProvider([
-                    'sql' => $sql,
-
-                ]);
-            } else {
+            if ($valorRespuesta != "" && $valorCurso != "") {
                 //condicion si hay seleccion
                 $sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante where id_egresado=:id_egresado and id_curso=:cursoid union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante where id_egresado=:id_egresado and id_curso=:cursoid union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante where id_egresado=:id_egresado and id_curso=:cursoid union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante where id_egresado=:id_egresado and id_curso=:cursoid";
 
@@ -107,117 +99,161 @@ class ReportController extends Controller
     public function actionEstudiante_indice()
     {
         $model = new EstudianteIndiceForm;
+
         if ($model->load(Yii::$app->request->post())) {
             //$valorRespuesta = $model->indiceChk;
+            $dataProvider='';
             $valorCurso= $model->cursoid;
-            if($model->indiceChk!=1)
-                $valorRespuesta[]=true;
-            else
-                $valorRespuesta[]=false;
-
-            if($model->habilitarChk!=1)
+            if($model->cursoid > 0)
             {
-                $valorRespuesta[]=true;
-                $valorRespuesta[]=true;
-                $valorRespuesta[]=true;
-                $valorRespuesta[]=true;
-                // $model->indiceText="";
-                $model->espanolText="";
-                $model->matematicaText="";
-                $model->historiaText="";
-                $model->espanolChk='';
-                $model->matematicaChk='';
-                $model->historiaChk='';
-
-            }else
-            {
-
-
-                if($model->espanolChk!=1){
+                if($model->indiceChk!=1){
                     $valorRespuesta[]=true;
+                    $model->indiceText="";
+                }
+
+                else
+                    $valorRespuesta[]=false;
+
+                if($model->habilitarChk!=1)
+                {
+                    $valorRespuesta[]=true;
+                    $valorRespuesta[]=true;
+                    $valorRespuesta[]=true;
+                    $valorRespuesta[]=true;
+                    // $model->indiceText="";
                     $model->espanolText="";
-                }
-                else
-                    $valorRespuesta[]=false;
-
-                if($model->matematicaChk!=1){
-                    $valorRespuesta[]=true;
                     $model->matematicaText="";
-                }
-                else
-                    $valorRespuesta[]=false;
-
-                if($model->historiaChk!=1){
-                    $valorRespuesta[]=true;
                     $model->historiaText="";
-                }
-                else
+                    $model->espanolChk='';
+                    $model->matematicaChk='';
+                    $model->historiaChk='';
+
+                }else
+                {
+
+
+                    if($model->espanolChk!=1){
+                        $valorRespuesta[]=true;
+                        $model->espanolText="";
+                    }
+                    else
+                        $valorRespuesta[]=false;
+
+                    if($model->matematicaChk!=1){
+                        $valorRespuesta[]=true;
+                        $model->matematicaText="";
+                    }
+                    else
+                        $valorRespuesta[]=false;
+
+                    if($model->historiaChk!=1){
+                        $valorRespuesta[]=true;
+                        $model->historiaText="";
+                    }
+                    else
+                        $valorRespuesta[]=false;
+
                     $valorRespuesta[]=false;
 
-                $valorRespuesta[]=false;
-
-            }
-
-            $sql="SELECT nombre AS Nombre,indice_academico AS Índice,nota_matematica AS Matemática,nota_espannol AS Español,nota_historia AS Historia FROM estudiante";
-
-            if($model->indiceText!='')
-                $sql = $sql." where indice_academico >= ".$model->indiceText;
+                }
 
 
-            if ( $model->matematicaText!=''){
-                if (!(strpos($sql,'where')))
-                    $sql = $sql." where nota_matematica >= ".$model->matematicaText;
+
+                    $valorRespuesta[] = false;
+
+
+                    $sql = "SELECT nombre AS Nombre,indice_academico AS Índice,nota_matematica AS Matemática,nota_espannol AS Español,nota_historia AS Historia FROM estudiante WHERE id_curso=:cursoid";
+
+                    if ($model->indiceText != '')
+                        $sql = $sql . " and indice_academico >= " . $model->indiceText;
+
+
+                    if ($model->matematicaText != '') {
+                       /*if (!(strpos($sql, 'where')))
+                            $sql = $sql . " where nota_matematica >= " . $model->matematicaText;
+                        else*/
+                            $sql = $sql . " and nota_matematica >=" . $model->matematicaText;
+
+                    }
+                    if ($model->espanolText != '') {
+
+                       /* if (!(strpos($sql, 'where')))
+                            $sql = $sql . " where nota_espannol >= " . $model->espanolText;
+                        else*/
+                            $sql = $sql . " and nota_espannol >=" . $model->espanolText;
+
+                    }
+                    if ($model->historiaText != '') {
+
+                       // if (!(strpos($sql, 'where')))
+                           // $sql = $sql . " where nota_historia >= " . $model->historiaText;
+                       // else
+                            $sql = $sql . " and nota_historia >=" . $model->historiaText;
+
+                    }
+
+
+                    $dataProvider = new SqlDataProvider([
+                        'sql' => $sql,
+                        'pagination'=>false,
+                        'params' => [':cursoid' => $valorCurso ],
+
+                    ]);
+                }
                 else
-                    $sql= $sql." and nota_matematica >=".$model->matematicaText;
+                    {
+                    $valorRespuesta[]=true;  // disabled de indice texto
+                    $valorRespuesta[]=true;   // disabled de espanol texto
+                    $valorRespuesta[]=true;     // disabled de matematica texto
+                    $valorRespuesta[]=true;     // disabled de historia texto
+                    $valorRespuesta[]=true;     // disabled de checkbox pruebas ingreso
+                    $valorRespuesta[]=true;     // disabled de checkbox indice y notas y submmit
+
+                    $model->indiceChk='';
+                    $model->indiceText="";
+                    $model->espanolText="";
+                    $model->matematicaText="";
+                    $model->historiaText="";
+                    $model->espanolChk='';
+                    $model->matematicaChk='';
+                    $model->historiaChk='';
+                    $model->habilitarChk='';
 
             }
-            if ($model->espanolText!=''){
-
-                if (!(strpos($sql,'where')))
-                    $sql = $sql." where nota_espannol >= ".$model->espanolText;
-                else
-                    $sql= $sql." and nota_espannol >=".$model->espanolText;
-
-            }
-            if ($model->historiaText!=''){
-
-                if (!(strpos($sql,'where')))
-                    $sql = $sql." where nota_historia >= ".$model->historiaText;
-                else
-                    $sql= $sql." and nota_historia >=".$model->historiaText;
-
-            }
 
 
-            $dataProvider = new SqlDataProvider([
-                'sql' => $sql,
 
-            ]);
 
 
             return $this->render('estudiante_indice',
-                ['sql'=>$sql,
+                [
                     'seleccionCurso' =>"",
+                    'pagination'=>false,
                     'dataProvider' => $dataProvider,
                     'seleccionEgresado' => $valorRespuesta,
                     'mymodel' => $model]);
         }
 
-        $valorRespuesta[]=true;
-        $valorRespuesta[]=true;
-        $valorRespuesta[]=true;
-        $valorRespuesta[]=true;
-        $valorRespuesta[]=true;
+        $valorRespuesta[]=true;  // disabled de indice texto
+        $valorRespuesta[]=true;   // disabled de espanol texto
+        $valorRespuesta[]=true;     // disabled de matematica texto
+        $valorRespuesta[]=true;     // disabled de historia texto
+        $valorRespuesta[]=true;     // disabled de checkbox pruebas ingreso
+        $valorRespuesta[]=true;     // disabled de checkbox indice y notas y submmit
+
+
+
 
         //$sql="SELECT nombre AS Nombre,indice_academico AS Índice,nota_matematica AS Matemática,nota_espannol AS Español,nota_historia AS Historia FROM estudiante";
         $sql="SELECT '' AS Nombre, '' AS Índice, '' AS Matemática, '' AS Español, '' AS Historia";
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
         return $this->render('estudiante_indice',
-            ['sql'=>$sql,
+            [
                 'seleccionCurso' =>"",
                 'dataProvider' => $dataProvider,
                 'seleccionEgresado' =>$valorRespuesta,
@@ -240,6 +276,7 @@ class ReportController extends Controller
 
             $dataProvider = new SqlDataProvider([
                 'sql' => $sql,
+                'pagination'=>false,
                 'params' => [':cursoid' => $valorRespuesta],
             ]);
             return $this->render('estudiantes_notas_indice', [
@@ -260,7 +297,8 @@ class ReportController extends Controller
         $dataProvider = new SqlDataProvider([
 
             'sql' => $sql,
-            'pagination'=>array('pageSize'=>10),
+
+            'pagination'=>false,
 
         ]);
 
