@@ -16,10 +16,10 @@
 ?>
 
 <div class="form-group flex-column col-xl-6 ">
-    <div class="p-2 m-4 ">
+    <div class="">
         <?= $form->field($model, 'curso')->textInput() ?>
         <?= $form->field($model, 'archivo',)->fileInput() ?>
-        <?= Html::submitButton('Importar', [
+        <?= Html::submitButton('Enviar', [
             'class' => 'btn btn-primary',
             'name'  => 'send-button'
         ]) ?>

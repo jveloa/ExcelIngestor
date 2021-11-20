@@ -27,7 +27,7 @@ $this->beginPage()
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
 
-<header>
+<header class="p-4">
     <?php
     NavBar::begin([
         'brandLabel' => 'Diagnóstico a estudiantes de nuevo ingreso',
@@ -61,7 +61,7 @@ $this->beginPage()
                         ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
                         ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
                         ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
-                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes por manifestaciones artísticas que práctican', 'url'=> ['/report/estudiantes_artes']],
 
 
                     ],
@@ -100,7 +100,7 @@ $this->beginPage()
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="float-left">&copy; Facultad de Informática <?= date('Y') ?></p>
         <p class="float-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
