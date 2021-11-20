@@ -46,17 +46,23 @@ $this->beginPage()
                     'label'=>'Reportes',
                     'items'=>[
 
+                        /// Ferrer
                         ['label' => 'Estudiantes por lugar de egreso', 'url'=> ['/report/egresado']],
                         ['label' => 'Datos de ingreso por lugar de egreso', 'url'=> ['/report/egresadonotas']],
                         ['label' => 'Estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiante_indice']],
-                        ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
+                        ['label' => 'Estudiantes que no cuentan con computadora', 'url'=> ['/report/estudiantes_no_computadora']],
                         ['label' => 'Listado de estudiantes por índice y notas de ingreso ', 'url'=> ['/report/estudiantes_notas_indice']],
                         ['label' => 'Datos de ingreso por curso seleccionado ', 'url'=> ['/report/estadisticas_curso']],
-                        ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
-                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
-                        ['label' => 'Estudiantes sin con computadora', 'url'=> ['/report/estudiantes_no_computadora']],
                         ['label' => 'Por ciento de formas de estudios por curso académico', 'url'=> ['/report/estudiantes_formas_estudios']],
                         ['label' => 'Por ciento de horas de estudios por curso académico', 'url'=> ['/report/estudiantes_horas_estudios']],
+
+
+                        /// Junior
+                        ['label' => 'Estudiantes por lugar de ingreso ', 'url'=> ['/report/via_ingreso']],
+                        ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+                        ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
+
 
                     ],
             ],
