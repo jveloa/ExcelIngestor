@@ -44,27 +44,27 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
         ),
         array(
-            'label'=>'Mucho(%)',
+            'label'=>'Mucho (%)',
             'attribute'=>'mucho',
 
         ),
         array(
-            'label'=>'Un poco(%)',
+            'label'=>'Un poco (%)',
             'attribute'=>'poco',
 
         ),
         array(
-            'label'=>'Nunca(%)',
+            'label'=>'Nunca (%)',
             'attribute'=>'nunca',
 
         ),
         array(
-            'label'=>'No sé(%)',
+            'label'=>'No sé (%)',
             'attribute'=>'no',
 
         ),
         array(
-            'label'=>'No respondio(%)',
+            'label'=>'No respondio (%)',
             'attribute'=>'ns',
 
         ),

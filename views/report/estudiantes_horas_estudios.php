@@ -39,13 +39,13 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
     'columns' => [
 
         array(
-            'label'=>'Horas semanales',
+            'label'=>'Horas semanales dedicadas al estudio',
             'attribute'=>'tipo',
 
         ),
 
         array(
-            'label'=>'Por ciento(%)',
+            'label'=>'%',
             'attribute'=>'ciento',
 
         ),

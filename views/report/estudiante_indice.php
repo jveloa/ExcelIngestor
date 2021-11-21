@@ -48,11 +48,15 @@ $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
 
 <div class="col-12">
+    <div class="row">
+        <div>
     <?= $form1->field($mymodel,'habilitarChk')->checkbox([
         'label' => Yii::t('app', 'Notas de examen de ingreso'),
         'disabled'=>$seleccionEgresado[5],
         'onchange'=>'this.form.submit()']);
     ?>
+        </div>
+    </div>
 
 <div class="row">
     <div class="col-3">

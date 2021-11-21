@@ -35,7 +35,7 @@
 
 <div id="feedback">
     <div class="row ">
-        <div class="col ">Estudiantes por habitos :</div>
+        <div class="col ">Estudiantes por hábitos :</div>
     </div>
     
     <div class="table-responsive">
