@@ -19,6 +19,12 @@
     $form1 = ActiveForm::begin();
 ?>
 <div class="p-2 col-sm-12 col-md-12 col-xl-6">
+    
+    <?= $form1->field($model, 'idCurso')->dropdownList($listaCursos, [
+        'prompt'  => 'Seleccione',
+        'options' => [$model->idArte => ['selected' => true]]
+    ]); ?>
+    
     <?= $form1->field($model, 'idArte')->dropdownList($listaArtes, [
         'prompt'  => 'Seleccione',
         'options' => [$model->idArte => ['selected' => true]]
@@ -26,10 +32,7 @@
     
     ?>
     
-    <?= $form1->field($model, 'idCurso')->dropdownList($listaCursos, [
-        'prompt'  => 'Seleccione',
-        'options' => [$model->idArte => ['selected' => true]]
-    ]); ?>
+   
     
     
     <div class="form-group ">
@@ -43,7 +46,7 @@
 <div id="feedback">
     
     <div class="row ">
-        <div class="col ">Estudiantes por manifestación artística que práctica :</div>
+        <div class="col ">Estudiantes que la practican :</div>
     </div>
     
     <div class="table table-striped">

@@ -30,7 +30,7 @@
         
         public function attributeLabels(){
             return [
-                'idDeporte' => 'Deportes',
+                'idDeporte' => 'Deporte',
                 'idCurso'   => 'Curso'
             ];
         }
