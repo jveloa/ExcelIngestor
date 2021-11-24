@@ -264,34 +264,48 @@ class ReportController extends Controller
         $model = new EstudiantesNotasIndiceForm();
 
         if ($model->load(Yii::$app->request->post())) {
-            $valorRespuesta= $model->cursoid;
-            $sql="SELECT nombre AS Nombre";
+            if ($model->cursoid > 0) {
+                $valorRespuesta = $model->cursoid;
+                $valorAux[] = false;
+                $valorAux[] = false;
 
-            if($model->indiceChk==1)
-                $sql= $sql." ,indice_academico AS Índice";
-            if ($model->notasChk==1)
-                $sql=$sql." ,nota_matematica AS matemática,nota_espannol AS Español,nota_historia AS Historia";
+                $sql = "SELECT nombre AS Nombre";
 
-            $sql= $sql." FROM estudiante WHERE id_curso=:cursoid";
+                if ($model->indiceChk == 1)
+                    $sql = $sql . " ,indice_academico AS Índice";
+                if ($model->notasChk == 1)
+                    $sql = $sql . " ,nota_matematica AS matemática,nota_espannol AS Español,nota_historia AS Historia";
 
-            $dataProvider = new SqlDataProvider([
-                'sql' => $sql,
-                'pagination'=>false,
-                'params' => [':cursoid' => $valorRespuesta],
-            ]);
-            return $this->render('estudiantes_notas_indice', [
-                'seleccionEgresado' => $valorRespuesta,
-                'dataProvider' => $dataProvider,
-                'mymodel' => $model
-            ]);
+                $sql = $sql . " FROM estudiante WHERE id_curso=:cursoid";
 
+                $dataProvider = new SqlDataProvider([
+                    'sql' => $sql,
+                    'pagination' => false,
+                    'params' => [':cursoid' => $valorRespuesta],
+                ]);
+                return $this->render('estudiantes_notas_indice', [
+                    'seleccionEgresado' => $valorRespuesta,
+                    'valor' => $valorAux,
+                    'dataProvider' => $dataProvider,
+                    'mymodel' => $model
+                ]);
+
+            }
+            else{
+                $model->indiceChk='';
+                $model->notasChk='';
+            }
         }
-
         // $sql="SELECT nombre AS Nombre,indice_academico AS Índice,nota_matematica AS Matemática,nota_espannol AS Español,nota_historia AS Historia FROM estudiante";
         $sql="SELECT '' AS Nombre,'' AS Índice,'' AS Matemática,'' AS Español,'' AS Historia";
 
-        //$model->indiceChk=1;
-        //$model->notasChk=1;
+        //$model->indiceChk=0;
+        //$model->notasChk=0;
+
+        $valorAux[]=true;
+        $valorAux[]=true;
+
+
 
 
         $dataProvider = new SqlDataProvider([
@@ -304,6 +318,7 @@ class ReportController extends Controller
 
         return $this->render('estudiantes_notas_indice', [
             'dataProvider' => $dataProvider,
+            'valor'=>$valorAux,
             'seleccionEgresado' =>"",
             'mymodel' => $model
         ]);
@@ -317,41 +332,45 @@ class ReportController extends Controller
 
 
         if ($model1->load(Yii::$app->request->post())) {
-            $valorRespuesta = $model1->cursoid;
-            if ($valorRespuesta == "") {
-                //Cuando no hay seleccion
-                $sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante";
+            if ($model1->cursoid > 0){
+                    $valorRespuesta = $model1->cursoid;
+               /* if ($valorRespuesta == "") {
+                    //Cuando no hay seleccion
+                    $sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante";
 
-                $dataProvider = new SqlDataProvider([
-                    'sql' => $sql,
+                    $dataProvider = new SqlDataProvider([
+                        'sql' => $sql,
 
-                ]);
-            } else {
-                //condicion si hay seleccion
-                $sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante where id_curso=:cursoid union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante where id_curso=:cursoid union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante where id_curso=:cursoid union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante where id_curso=:cursoid";
+                    ]);
+                } */
+                    //condicion si hay seleccion
+                    $sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante where id_curso=:cursoid union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante where id_curso=:cursoid union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante where id_curso=:cursoid union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante where id_curso=:cursoid";
 
 
-                $dataProvider = new SqlDataProvider([
-                    'sql'    => $sql,
-                    'params' => [':cursoid' => $valorRespuesta],
+                    $dataProvider = new SqlDataProvider([
+                        'sql'    => $sql,
+                        'pagination'=>false,
+                        'params' => [':cursoid' => $valorRespuesta],
 
-                ]);
+                    ]);
+                    return $this->render('estadisticas_curso', [
+                        'seleccionCurso' => $valorRespuesta,
+                        'dataProvider'      => $dataProvider,
+                        'mymodel'           => $model1
+                    ]);
             }
 
-            return $this->render('estadisticas_curso', [
-                'seleccionEgresado' => $valorRespuesta,
-                'dataProvider'      => $dataProvider,
-                'mymodel'           => $model1
-            ]);
+
         }
         //$sql = "SELECT 'Índice Académico' as Tipo, Max(indice_academico) as Máximo, Min(indice_academico) as Mínimo, round(Avg(indice_academico),2) as Promedio FROM estudiante union SELECT 'Matemática' as Tipo, Max(nota_matematica) as Máximo, Min(nota_matematica) as Mínimo, round(Avg(nota_matematica),2) as Promedio FROM estudiante union SELECT 'Español' as Tipo, Max(nota_espannol) as Máximo, Min(nota_espannol) as Mínimo, round(Avg(nota_espannol),2) as Promedio FROM estudiante union SELECT 'Historia' as Tipo, Max(nota_historia) as Máximo, Min(nota_historia) as Mínimo, round(Avg(nota_historia),2) as Promedio FROM estudiante";
         $sql="SELECT '' as Tipo, '' as Máximo, '' as Mínimo, '' as Promedio";
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
         return $this->render('estadisticas_curso', [
-            'seleccionEgresado' => '',
+            'seleccionCurso' => '',
             'dataProvider'      => $dataProvider,
             'mymodel'           => $model1
         ]);
@@ -362,33 +381,35 @@ class ReportController extends Controller
     {
         $model = new EstudiantesNoComputadoraForm();
 
+            if ($model->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post())) {
-            $valorRespuesta = $model->cursoid;
-            //condicion si hay seleccion
-            //$sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
-            $sql = "SELECT nombre AS Nombre FROM estudiante WHERE id_dispo_copumtadora=21 and id_curso=:cursoid ";
+                    $valorRespuesta = $model->cursoid;
+                    //condicion si hay seleccion
+                    //$sql = "SELECT nombre AS Nombre FROM estudiante INNER JOIN resp_preguntas_mas ON resp_preguntas_mas.id = estudiante.id_dispo_copumtadora WHERE resp_preguntas_mas.respuesta = 'No tengo acceso a ninguna' and estudiante.id_curso=:cursoid ";
+                    $sql = "SELECT nombre AS Nombre FROM estudiante WHERE id_dispo_copumtadora=21 and id_curso=:cursoid ";
 
+                    $dataProvider = new SqlDataProvider([
+                        'sql'    => $sql,
+                        'pagination'=>false,
+                        'params' => [':cursoid' => $valorRespuesta],
 
-            $dataProvider = new SqlDataProvider([
-                'sql'    => $sql,
-                'params' => [':cursoid' => $valorRespuesta],
+                    ]);
 
-            ]);
+                    return $this->render('estudiantes_no_computadora', [
+                        'seleccionEgresado' => $valorRespuesta,
+                        'dataProvider'      => $dataProvider,
+                        'mymodel'           => $model
+                    ]);
+                }
 
-
-            return $this->render('estudiantes_no_computadora', [
-                'seleccionEgresado' => $valorRespuesta,
-                'dataProvider'      => $dataProvider,
-                'mymodel'           => $model
-            ]);
-        }
         $sql = "SELECT '' AS Nombre ";
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
+
         return $this->render('estudiantes_no_computadora', [
             'seleccionEgresado' => '',
             'dataProvider'      => $dataProvider,
@@ -396,6 +417,7 @@ class ReportController extends Controller
         ]);
         //cuando no hay variable de post
     }
+
     public function actionEstudiantes_formas_estudios()
     {
         $model = new EstudiantesFormasEstudiosForm();
@@ -412,13 +434,14 @@ class ReportController extends Controller
 
             $dataProvider = new SqlDataProvider([
                 'sql'    => $sql,
+                'pagination'=>false,
                 'params' => [':cursoid' => $valorRespuesta],
 
             ]);
 
 
             return $this->render('estudiantes_formas_estudios', [
-                'seleccionEgresado' => $valorRespuesta,
+                'seleccionCurso' => $valorRespuesta,
                 'dataProvider'      => $dataProvider,
                 'mymodel'           => $model
             ]);
@@ -427,10 +450,11 @@ class ReportController extends Controller
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
         return $this->render('estudiantes_formas_estudios', [
-            'seleccionEgresado' => '',
+            'seleccionCurso' => '',
             'dataProvider'      => $dataProvider,
             'mymodel'           => $model
         ]);
@@ -456,13 +480,14 @@ class ReportController extends Controller
 
             $dataProvider = new SqlDataProvider([
                 'sql'    => $sql,
+                'pagination'=>false,
                 'params' => [':cursoid' => $valorRespuesta],
 
             ]);
 
 
             return $this->render('estudiantes_horas_estudios', [
-                'seleccionEgresado' => $valorRespuesta,
+                'seleccionCurso' => $valorRespuesta,
                 'dataProvider'      => $dataProvider,
                 'mymodel'           => $model
             ]);
@@ -471,10 +496,11 @@ class ReportController extends Controller
 
         $dataProvider = new SqlDataProvider([
             'sql' => $sql,
+            'pagination'=>false,
 
         ]);
         return $this->render('estudiantes_horas_estudios', [
-            'seleccionEgresado' => '',
+            'seleccionCurso' => '',
             'dataProvider'      => $dataProvider,
             'mymodel'           => $model
         ]);

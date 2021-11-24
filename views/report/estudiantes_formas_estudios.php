@@ -21,18 +21,17 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
 <div class="p-2" style="width: 300px " >
     <?= $form1->field($mymodel, 'cursoid')->dropdownList($listaCurso,
-        ['prompt'=>'Seleccione',
-            'options'=>[$seleccionEgresado=>['selected'=>true]]]);
+             ['prompt'=>'Seleccione',
+            'onchange'=>'this.form.submit()',
+            'options'=>[$seleccionCurso=>['selected'=>true]]]);
     ?>
 </div>
 
-<div class="form-group ">
-    <?=  Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
-</div>
+
 <?php $form1 = ActiveForm::end();?>
 
 
-
+<?php if ($seleccionCurso > 0) {?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'id'=>'gv',
@@ -45,34 +44,34 @@ $listaCurso = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso')
 
         ),
         array(
-            'label'=>'Mucho(%)',
+            'label'=>'Mucho (%)',
             'attribute'=>'mucho',
 
         ),
         array(
-            'label'=>'Un poco(%)',
+            'label'=>'Un poco (%)',
             'attribute'=>'poco',
 
         ),
         array(
-            'label'=>'Nunca(%)',
+            'label'=>'Nunca (%)',
             'attribute'=>'nunca',
 
         ),
         array(
-            'label'=>'No sé(%)',
+            'label'=>'No sé (%)',
             'attribute'=>'no',
 
         ),
         array(
-            'label'=>'No respondio(%)',
+            'label'=>'No respondio (%)',
             'attribute'=>'ns',
 
         ),
 
 
     ],
-]);?>
+]);}?>
 
 
 
