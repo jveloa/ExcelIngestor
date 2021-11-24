@@ -59,7 +59,7 @@
         } ?>
 
     <div class="table table-striped">
-        <table>
+        <table class="col-xl-6">
             <thead>
             <tr>
                 <th scope="col">Nombre y Apellidos</th>

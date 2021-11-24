@@ -37,7 +37,7 @@ $this->beginPage()
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav '],
+        'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             
