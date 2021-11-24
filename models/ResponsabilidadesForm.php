@@ -21,7 +21,7 @@
                     'number',
                 ],
                 [
-                    ['idCurso'],
+                    ['idCurso','idResponsabilidades'],
                     'required'
                 ],
             ];

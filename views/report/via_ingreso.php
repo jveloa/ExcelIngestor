@@ -1,6 +1,5 @@
 <?php
     
-    use app\models\db\Estudiante;
     use yii\helpers\Html;
     use yii\widgets\ActiveForm;
     
@@ -13,53 +12,59 @@
     $listaCursos = \yii\helpers\BaseArrayHelper::map($cursoData, 'id', 'curso');
     
     $form1 = ActiveForm::begin();
-   
 ?>
-<div class="p-2" style="width: 300px " >
+
+<div class="p-2 col-sm-12 col-md-12 col-xl-6">
     <?= $form1->field($model, 'cursoid')->dropdownList($listaCursos,
         ['prompt'=>'Seleccione',
             'options'=>[$model->cursoid=>['selected'=>true]]]);
     ?>
-</div>
-<div class="p-2" style="width: 300px ">
-    <?= $form1->field($model, 'idIngreso')->dropdownList($listaIngresos, [
-        'prompt'  => 'Seleccione',
-        'options' => [$model->idIngreso => ['selected' => true]]
-    ]); ?>
-</div>
-
-<div class="form-group ">
-    <?= Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
-</div>
-<?php $form1 = ActiveForm::end(); ?>
-
-
-
-<div class="row">
-    <div class="col">Estudiantes por vía de ingreso seleccionado :</div>
-</div>
-
-
-<div class="row">
-    <div class="col">Nombre y apellidos</div>
-</div>
-<div id="feedback">
     
-    <?php foreach ($model->getEstudiantes() as $est){ ?>
-        <div class="col"><?php echo $est->nombre ?></div>
+    
+    <?= $form1->field($model, 'idIngreso')->dropdownList($listaIngresos, [
+        'prompt' => 'Seleccione', 'options' => [$model->idIngreso => ['selected' => true]]
+    ]); ?>
 
 
+    <div class="form-group ">
+        <?= Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
+    </div>
+    
+    <?php $form1 = ActiveForm::end(); ?>
+</div>
 
-    <?php } ?>
+
+<div id="feedback" >
+    <div class="row">
+        <div class="col">Estudiantes por vía de ingreso seleccionado :</div>
+    </div>
+
+
+    <div class="table-responsive table table-striped">
+        <table >
+            <thead>
+            <tr>
+                <th scope="col">Nombre y Apellidos</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            <?php foreach ($model->getEstudiantes() as $est){ ?>
+                <tr>
+                    <td><?php echo $est->nombre ?> </td>
+                </tr>
+                <?php
+            } ?>
+            </tbody>
+        </table>
+    </div>
     <hr>
     <div class="col-lg-offset-10 col-lg-11">
         Total de estudiantes <?php echo $model->getCantEstudiantes(); ?>
     </div>
-
 </div>
 
-
-
+</div>
 
 
 </html>
