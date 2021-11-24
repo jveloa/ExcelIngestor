@@ -40,7 +40,7 @@
             return $lista;
         }
         
-        public function getHabitos($carne){
+        public function getDeportes($carne){
             $lista = "";
             if (isset($this->estudiante)){
                 $listaDeporte = Deporte::find()
@@ -50,18 +50,21 @@
                 foreach ($listaDeporte as $item){
                     $lista = $lista . $item->deporte . ',';
                 }
-                
-                $listaArte = Arte::find()
-                    ->innerJoin('estudiante_arte', 'estudiante_arte.id_arte = arte.id')
-                    ->where(['estudiante_arte.id_estudiante' => $carne])
-                    ->all();
-    
-                foreach ($listaArte as $item){
-                    $lista = $lista . $item->arte . ',';
-                }
             }
             return $lista;
         }
         
+        public function getArtes($carne){
+            $lista = "";
+            $listaArte = Arte::find()
+                ->innerJoin('estudiante_arte', 'estudiante_arte.id_arte = arte.id')
+                ->where(['estudiante_arte.id_estudiante' => $carne])
+                ->all();
+            foreach ($listaArte as $item){
+                $lista = $lista . $item->arte . ',';
+            }
+            return $lista;
+            
+        }
         
     }

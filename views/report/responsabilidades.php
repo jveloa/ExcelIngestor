@@ -17,6 +17,13 @@
     $form1 = ActiveForm::begin();
 ?>
 <div class="p-2 col-sm-12 col-md-12 col-xl-6">
+    
+    <?= $form1->field($model, 'idCurso')->dropdownList($listaMap, [
+        'prompt'  => 'Seleccione',
+        'options' => [$model->idCurso => ['selected' => true]]
+    ]); ?>
+
+
     <?= $form1->field($model, 'idResponsabilidades')->dropdownList($lista, [
         'prompt'  => 'Seleccione',
         'options' => [$model->idResponsabilidades => ['selected' => true]]
@@ -24,11 +31,7 @@
     
     ?>
     
-    <?= $form1->field($model, 'idCurso')->dropdownList($listaMap, [
-        'prompt'  => 'Seleccione',
-        'options' => [$model->idCurso => ['selected' => true]]
-    ]); ?>
-
+   
 
     <div class="form-group ">
         <?= Html::submitButton('Seleccionar', ['class' => 'btn btn-primary']) ?>
@@ -56,7 +59,7 @@
         } ?>
 
     <div class="table table-striped">
-        <table>
+        <table class="col-xl-6">
             <thead>
             <tr>
                 <th scope="col">Nombre y Apellidos</th>

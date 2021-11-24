@@ -18,6 +18,11 @@
     $form1 = ActiveForm::begin();
 ?>
 <div class="p-2 col-sm-12 col-md-12 col-xl-6">
+    <?= $form1->field($model, 'idCurso')->dropdownList($listaCursos, [
+        'prompt'  => 'Seleccione',
+        'options' => [$model->idCurso => ['selected' => true]]
+    ]); ?>
+    
     <?= $form1->field($model, 'idDeporte')->dropdownList($listaDeportes, [
         'prompt'  => 'Seleccione',
         'options' => [$model->idDeporte => ['selected' => true]]
@@ -25,10 +30,7 @@
     
     ?>
     
-    <?= $form1->field($model, 'idCurso')->dropdownList($listaCursos, [
-        'prompt'  => 'Seleccione',
-        'options' => [$model->idCurso => ['selected' => true]]
-    ]); ?>
+   
 
 
     <div class="form-group ">
@@ -42,7 +44,7 @@
 <div id="feedback">
     
     <div class="row ">
-        <div class="col ">Estudiantes por Deporte que práctica :</div>
+        <div class="col ">Estudiantes que lo practican :</div>
     </div>
 
     <div class="table table-striped">

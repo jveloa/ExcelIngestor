@@ -37,7 +37,7 @@ $this->beginPage()
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav '],
+        'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
             
@@ -60,7 +60,7 @@ $this->beginPage()
                         ['label' => 'Estudiantes por nivel de interés de pertenecer a organizaciones', 'url'=> ['/report/responsabilidades']],
                         ['label' => 'Estudiantes por deporte que práctican', 'url'=> ['/report/estudiantes_deportes']],
                         ['label' => 'Estudiantes por manifestaciones artísticas que práctican', 'url'=> ['/report/estudiantes_artes']],
-                        ['label' => 'Habitos de estudiante', 'url'=> ['/report/estudiantes_habitos']],
+                        ['label' => 'Deportes y manifestaciones artísticas que practican', 'url'=> ['/report/estudiantes_habitos']],
 
                     ],
             ],
