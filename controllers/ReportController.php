@@ -468,7 +468,7 @@ class ReportController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $valorRespuesta = $model->cursoid;
-            //condicion si hay seleccionestudiante.id_curso=:cursoid
+
             $sql="SELECT 'Entre 20 o más' AS Tipo,round(CAST((SELECT COUNT(*) FROM estudiante WHERE estudiante.id_curso=:cursoid and id_horas_estudio=27) as numeric)*100/CAST((SELECT COUNT(*) FROM estudiante WHERE estudiante.id_curso=:cursoid) as numeric),2) AS Ciento";
             $sql=$sql." union SELECT (SELECT respuesta FROM resp_sobre_futuro WHERE id=24) AS Tipo,round(CAST((SELECT COUNT(*) FROM estudiante WHERE estudiante.id_curso=:cursoid and id_horas_estudio=24) as numeric)*100/CAST((SELECT COUNT(*) FROM estudiante WHERE estudiante.id_curso=:cursoid) as numeric),2) AS Ciento";
             $sql=$sql." union SELECT (SELECT respuesta FROM resp_sobre_futuro WHERE id=15) AS Tipo,round(CAST((SELECT COUNT(*) FROM estudiante WHERE estudiante.id_curso=:cursoid and id_horas_estudio=15) as numeric)*100/CAST((SELECT COUNT(*) FROM estudiante WHERE estudiante.id_curso=:cursoid) as numeric),2) AS Ciento";
