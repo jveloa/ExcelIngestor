@@ -6,7 +6,7 @@
 
     class EstudianteService{
         static function createEstudiante($dataEstdiante, $data){
-            $found = self::get($data['nombre']);
+            $found = self::get($data['carne']);
             if (!isset($found)){
                 $est                              = new Estudiante();
                 $est->carne                       = $data['carne'];
@@ -112,13 +112,13 @@
                 $est->id_espacio_estudiar         = $dataEstdiante['idEspacioEstudiar'];
                 $est->id_curso                    = $dataEstdiante['idCurso'];
                 $est->save(false);
-                return self::get($data['nombre'])['carne'];
+                return self::get($data['carne'])['carne'];
             }
-            return self::get($data['nombre'])['carne'];
+            return self::get($data['carne'])['carne'];
         }
         
-        static function get($nombre){
-            $est = Estudiante::findOne(['nombre'=> $nombre]);
+        static function get($carne){
+            $est = Estudiante::findOne(['carne'=> $carne]);
             if(isset($est)){
                 return $est->getAttributes();
             }else return null;

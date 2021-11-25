@@ -259,152 +259,133 @@
         }
     
         public function inputExcelDB($data, $curso){
-            $trans = Yii::$app->db->beginTransaction();
-            try{
-                //tabla estudiante y todas las tablas que tienen llave foranea en estudiante
-                $idProvincia              = ProvinciaService::create($data['provincia']);
-                $idMunicipio              = MunicipioSevices::create($data['municipio'], $idProvincia);
-                $idEgresado               = EgresadoService::create($data['egresadoDe']);
-                $idIngreso                = IngresoService::create($data['viaIngreso']);
-                $idMilitar                = DatoMilitarService::create($data['datosMil']);
-                $idIntegracionPolitica    = IntegracionPoliticaService::create($data['orgPolitica']);
-                $idEstadoCivil            = EstadoCivilService::create($data['estadoCivil']);
-                $idConvivencia            = ConvivenciaService::create($data['convivenCon']);
-                $idDependenciaEconomica   = DependenciaEconService::create($data['dependenciaEco']);
-                $idSectorOcupacionalPadre = SectorOcupacionalService::create($data['trabajoPadre']);
-                $idSectorOcupacionalMadre = SectorOcupacionalService::create($data['trabajoMadre']);
-                $idNivelEscolarPadre      = NivelEscolaridadService::create($data['nivelEscolarPadre']);
-                $idNivelEscolarMadre      = NivelEscolaridadService::create($data['nivelEscolarMadre']);
-                $idTiempoTranscurrido     = RespSobreEleccionService::create($data['tiempo12Grado']);
-                $idCarreraOpcion          = RespSobreEleccionService::create(strval($data['numOpcCarrera']));
-                $idDesicionEstudiar       = RespSobreEleccionService::create($data['tiempoDescCarrera']);
-                $idMantenerEstCarrera     = RespSobreFuturoService::create($data['desicionCarrera']);
-                $idTrabajoGraduado        = RespSobreFuturoService::create($data['imaginaGraduado']);
-                $idProgramador            = RespSobreFuturoService::create($data['programador']);
-                $idProbador               = RespSobreFuturoService::create($data['probador']);
-                $idDiseñadorSoft          = RespSobreFuturoService::create($data['diseñadorSoft']);
-                $idDiseñadorUI            = RespSobreFuturoService::create($data['diseñadorUIUX']);
-                $idSeguridad              = RespSobreFuturoService::create($data['seguridad']);
-                $idEscritorExp            = RespSobreFuturoService::create($data['escritorExp']);
-                $idGestorProyectos        = RespSobreFuturoService::create($data['gestorProyecto']);
-                $idFacilitadorDesc        = RespSobreFuturoService::create($data['tomaDesicion']);
-                $idDesepeñoPro            = RespSobreFuturoService::create($data['desempeño']);
-                $idRelacionCarrera        = RespSobreFuturoService::create($data['relacionProfesiones']);
-                $idImportanciaSocie       = RespSobreFuturoService::create($data['imporSociedad']);
-                $idInfluenciaCien         = RespSobreFuturoService::create($data['influenciaDesarollo']);
-                $idSuperacionConst        = RespSobreFuturoService::create($data['superacionContacte']);
-                $idHorasEstudio           = RespSobreFuturoService::create($data['horasEstudio']);
-                $idHorasOtrosTrab         = RespSobreFuturoService::create($data['horasTrabajos']);
-                $idHorasRecreacion        = RespSobreFuturoService::create($data['horasRecreacion']);
-                $idEstudioLibro           = RespSobreFuturoService::create($data['estIndividualLibro']);
-                $idEstudioGrupal          = RespSobreFuturoService::create($data['estGrupal']);
-                $idEstudioEjercicios      = RespSobreFuturoService::create($data['realizarEjercicios']);
-                $idEstudioRepasadores     = RespSobreFuturoService::create($data['repasadores']);
-                $idInteresOrg             = RespSobreFuturoService::create($data['direcEstudiantil']);
-                $idIntresProbSociAmbi     = RespSobreFuturoService::create($data['probSociales']);
-                $idInteresPracLabo        = RespSobreFuturoService::create($data['practProfesionales']);
-                $idFumador                = RespDeporteArteService::create($data['fumas']);
-                $idBebedor                = RespDeporteArteService::create($data['alcohol']);
-                $idPracDeporte            = RespDeporteArteService::create($data['pracDeporte']);
-                $idPracArte               = RespDeporteArteService::create($data['practArtes']);
-                $idLoEscencial            = RespPreguntasMasService::create($data['pregunta1']);
-                $idNoSoloPan              = RespPreguntasMasService::create($data['pregunta2']);
-                $idCamaron                = RespPreguntasMasService::create($data['pregunta3']);
-                $idAEsMenor               = RespPreguntasMasService::create($data['pregunta4']);
-                $idEditoresText           = RespPreguntasMasService::create($data['editores']);
-                $idHojasCalculo           = RespPreguntasMasService::create($data['hojasCalculo']);
-                $idPresentaciones         = RespPreguntasMasService::create($data['presentaciones']);
-                $idSotfGrafico            = RespPreguntasMasService::create($data['sotfGrafico']);
-                $idLengProgramacion       = RespPreguntasMasService::create($data['lengProgra']);
-                $idDispPc                 = RespPreguntasMasService::create($data['Computadora']);
-                $idEspacioEstudiar        = RespPreguntasMasService::create($data['espacioEstudio']);
-                $idCurso                  = CursoService::create($curso);
-                
-                $dataEstudiante           = [
-                    'idMunicipio'              => $idMunicipio,
-                    'idEgresado'               => $idEgresado,
-                    'idIngreso'                => $idIngreso,
-                    'datosMil'                 => $idMilitar,
-                    'orgPolitica'              => $idIntegracionPolitica,
-                    'estadoCivil'              => $idEstadoCivil,
-                    'idConvivencia'            => $idConvivencia,
-                    'idDependenciaEconomica'   => $idDependenciaEconomica,
-                    'idSectorOcupacionalPadre' => $idSectorOcupacionalPadre,
-                    'idSectorOcupacionalMadre' => $idSectorOcupacionalMadre,
-                    'idNivelEscolarPadre'      => $idNivelEscolarPadre,
-                    'idNivelEscolarMadre'      => $idNivelEscolarMadre,
-                    'idTiempoTranscurrido'     => $idTiempoTranscurrido,
-                    'idCarreraOpcion'          => $idCarreraOpcion,
-                    'idDesicionEstudiar'       => $idDesicionEstudiar,
-                    'idMantenerEstCarrera'     => $idMantenerEstCarrera,
-                    'idTrabajoGraduado'        => $idTrabajoGraduado,
-                    'idProgramador'            => $idProgramador,
-                    'idProbador'               => $idProbador,
-                    'idDiseñadorSoft'          => $idDiseñadorSoft,
-                    'idDiseñadorUI'            => $idDiseñadorUI,
-                    'idSeguridad'              => $idSeguridad,
-                    'idEscritorExp'            => $idEscritorExp,
-                    'idGestorProyectos'        => $idGestorProyectos,
-                    'idFacilitadorDesc'        => $idFacilitadorDesc,
-                    'idDesepeñoPro'            => $idDesepeñoPro,
-                    'idRelacionCarrera'        => $idRelacionCarrera,
-                    'idImportanciaSocie'       => $idImportanciaSocie,
-                    'idInfluenciaCien'         => $idInfluenciaCien,
-                    'idSuperacionConst'        => $idSuperacionConst,
-                    'idHorasEstudio'           => $idHorasEstudio,
-                    'idHorasOtrosTrab'         => $idHorasOtrosTrab,
-                    'idHorasRecreacion'        => $idHorasRecreacion,
-                    'idEstudioLibro'           => $idEstudioLibro,
-                    'idEstudioGrupal'          => $idEstudioGrupal,
-                    'idEstudioEjercicios'      => $idEstudioEjercicios,
-                    'idEstudioRepasadores'     => $idEstudioRepasadores,
-                    'idInteresOrg'             => $idInteresOrg,
-                    'idIntresProbSociAmbi'     => $idIntresProbSociAmbi,
-                    'idInteresPracLabo'        => $idInteresPracLabo,
-                    'idFumador'                => $idFumador,
-                    'idBebedor'                => $idBebedor,
-                    'idPracDeporte'            => $idPracDeporte,
-                    'idPracArte'               => $idPracArte,
-                    'idLoEscencial'            => $idLoEscencial,
-                    'idNoSoloPan'              => $idNoSoloPan,
-                    'idCamaron'                => $idCamaron,
-                    'idAEsMenor'               => $idAEsMenor,
-                    'idEditoresText'           => $idEditoresText,
-                    'idHojasCalculo'           => $idHojasCalculo,
-                    'idPresentaciones'         => $idPresentaciones,
-                    'idSotfGrafico'            => $idSotfGrafico,
-                    'idLengProgramacion'       => $idLengProgramacion,
-                    'idDispPc'                 => $idDispPc,
-                    'idEspacioEstudiar'        => $idEspacioEstudiar,
-                    'idCurso'                  => $idCurso,
-                ];
+            $found = EstudianteService::get($data['carne']);
+            if (!isset($found)){
+                $trans = Yii::$app->db->beginTransaction();
+                try{
+                    //tabla estudiante y todas las tablas que tienen llave foranea en estudiante
+                    $idProvincia = ProvinciaService::create($data['provincia']);
+                    $idMunicipio = MunicipioSevices::create($data['municipio'], $idProvincia);
+                    $idEgresado = EgresadoService::create($data['egresadoDe']);
+                    $idIngreso = IngresoService::create($data['viaIngreso']);
+                    $idMilitar = DatoMilitarService::create($data['datosMil']);
+                    $idIntegracionPolitica = IntegracionPoliticaService::create($data['orgPolitica']);
+                    $idEstadoCivil = EstadoCivilService::create($data['estadoCivil']);
+                    $idConvivencia = ConvivenciaService::create($data['convivenCon']);
+                    $idDependenciaEconomica = DependenciaEconService::create($data['dependenciaEco']);
+                    $idSectorOcupacionalPadre = SectorOcupacionalService::create($data['trabajoPadre']);
+                    $idSectorOcupacionalMadre = SectorOcupacionalService::create($data['trabajoMadre']);
+                    $idNivelEscolarPadre = NivelEscolaridadService::create($data['nivelEscolarPadre']);
+                    $idNivelEscolarMadre = NivelEscolaridadService::create($data['nivelEscolarMadre']);
+                    $idTiempoTranscurrido = RespSobreEleccionService::create($data['tiempo12Grado']);
+                    $idCarreraOpcion = RespSobreEleccionService::create(strval($data['numOpcCarrera']));
+                    $idDesicionEstudiar = RespSobreEleccionService::create($data['tiempoDescCarrera']);
+                    $idMantenerEstCarrera = RespSobreFuturoService::create($data['desicionCarrera']);
+                    $idTrabajoGraduado = RespSobreFuturoService::create($data['imaginaGraduado']);
+                    $idProgramador = RespSobreFuturoService::create($data['programador']);
+                    $idProbador = RespSobreFuturoService::create($data['probador']);
+                    $idDiseñadorSoft = RespSobreFuturoService::create($data['diseñadorSoft']);
+                    $idDiseñadorUI = RespSobreFuturoService::create($data['diseñadorUIUX']);
+                    $idSeguridad = RespSobreFuturoService::create($data['seguridad']);
+                    $idEscritorExp = RespSobreFuturoService::create($data['escritorExp']);
+                    $idGestorProyectos = RespSobreFuturoService::create($data['gestorProyecto']);
+                    $idFacilitadorDesc = RespSobreFuturoService::create($data['tomaDesicion']);
+                    $idDesepeñoPro = RespSobreFuturoService::create($data['desempeño']);
+                    $idRelacionCarrera = RespSobreFuturoService::create($data['relacionProfesiones']);
+                    $idImportanciaSocie = RespSobreFuturoService::create($data['imporSociedad']);
+                    $idInfluenciaCien = RespSobreFuturoService::create($data['influenciaDesarollo']);
+                    $idSuperacionConst = RespSobreFuturoService::create($data['superacionContacte']);
+                    $idHorasEstudio = RespSobreFuturoService::create($data['horasEstudio']);
+                    $idHorasOtrosTrab = RespSobreFuturoService::create($data['horasTrabajos']);
+                    $idHorasRecreacion = RespSobreFuturoService::create($data['horasRecreacion']);
+                    $idEstudioLibro = RespSobreFuturoService::create($data['estIndividualLibro']);
+                    $idEstudioGrupal = RespSobreFuturoService::create($data['estGrupal']);
+                    $idEstudioEjercicios = RespSobreFuturoService::create($data['realizarEjercicios']);
+                    $idEstudioRepasadores = RespSobreFuturoService::create($data['repasadores']);
+                    $idInteresOrg = RespSobreFuturoService::create($data['direcEstudiantil']);
+                    $idIntresProbSociAmbi = RespSobreFuturoService::create($data['probSociales']);
+                    $idInteresPracLabo = RespSobreFuturoService::create($data['practProfesionales']);
+                    $idFumador = RespDeporteArteService::create($data['fumas']);
+                    $idBebedor = RespDeporteArteService::create($data['alcohol']);
+                    $idPracDeporte = RespDeporteArteService::create($data['pracDeporte']);
+                    $idPracArte = RespDeporteArteService::create($data['practArtes']);
+                    $idLoEscencial = RespPreguntasMasService::create($data['pregunta1']);
+                    $idNoSoloPan = RespPreguntasMasService::create($data['pregunta2']);
+                    $idCamaron = RespPreguntasMasService::create($data['pregunta3']);
+                    $idAEsMenor = RespPreguntasMasService::create($data['pregunta4']);
+                    $idEditoresText = RespPreguntasMasService::create($data['editores']);
+                    $idHojasCalculo = RespPreguntasMasService::create($data['hojasCalculo']);
+                    $idPresentaciones = RespPreguntasMasService::create($data['presentaciones']);
+                    $idSotfGrafico = RespPreguntasMasService::create($data['sotfGrafico']);
+                    $idLengProgramacion = RespPreguntasMasService::create($data['lengProgra']);
+                    $idDispPc = RespPreguntasMasService::create($data['Computadora']);
+                    $idEspacioEstudiar = RespPreguntasMasService::create($data['espacioEstudio']);
+                    $idCurso = CursoService::create($curso);
+            
+                    $dataEstudiante = [
+                        'idMunicipio'              => $idMunicipio, 'idEgresado' => $idEgresado,
+                        'idIngreso'                => $idIngreso, 'datosMil' => $idMilitar,
+                        'orgPolitica'              => $idIntegracionPolitica, 'estadoCivil' => $idEstadoCivil,
+                        'idConvivencia'            => $idConvivencia,
+                        'idDependenciaEconomica'   => $idDependenciaEconomica,
+                        'idSectorOcupacionalPadre' => $idSectorOcupacionalPadre,
+                        'idSectorOcupacionalMadre' => $idSectorOcupacionalMadre,
+                        'idNivelEscolarPadre'      => $idNivelEscolarPadre,
+                        'idNivelEscolarMadre'      => $idNivelEscolarMadre,
+                        'idTiempoTranscurrido'     => $idTiempoTranscurrido, 'idCarreraOpcion' => $idCarreraOpcion,
+                        'idDesicionEstudiar'       => $idDesicionEstudiar,
+                        'idMantenerEstCarrera'     => $idMantenerEstCarrera, 'idTrabajoGraduado' => $idTrabajoGraduado,
+                        'idProgramador'            => $idProgramador, 'idProbador' => $idProbador,
+                        'idDiseñadorSoft'          => $idDiseñadorSoft, 'idDiseñadorUI' => $idDiseñadorUI,
+                        'idSeguridad'              => $idSeguridad, 'idEscritorExp' => $idEscritorExp,
+                        'idGestorProyectos'        => $idGestorProyectos, 'idFacilitadorDesc' => $idFacilitadorDesc,
+                        'idDesepeñoPro'            => $idDesepeñoPro, 'idRelacionCarrera' => $idRelacionCarrera,
+                        'idImportanciaSocie'       => $idImportanciaSocie, 'idInfluenciaCien' => $idInfluenciaCien,
+                        'idSuperacionConst'        => $idSuperacionConst, 'idHorasEstudio' => $idHorasEstudio,
+                        'idHorasOtrosTrab'         => $idHorasOtrosTrab, 'idHorasRecreacion' => $idHorasRecreacion,
+                        'idEstudioLibro'           => $idEstudioLibro, 'idEstudioGrupal' => $idEstudioGrupal,
+                        'idEstudioEjercicios'      => $idEstudioEjercicios,
+                        'idEstudioRepasadores'     => $idEstudioRepasadores, 'idInteresOrg' => $idInteresOrg,
+                        'idIntresProbSociAmbi'     => $idIntresProbSociAmbi, 'idInteresPracLabo' => $idInteresPracLabo,
+                        'idFumador'                => $idFumador, 'idBebedor' => $idBebedor,
+                        'idPracDeporte'            => $idPracDeporte, 'idPracArte' => $idPracArte,
+                        'idLoEscencial'            => $idLoEscencial, 'idNoSoloPan' => $idNoSoloPan,
+                        'idCamaron'                => $idCamaron, 'idAEsMenor' => $idAEsMenor,
+                        'idEditoresText'           => $idEditoresText, 'idHojasCalculo' => $idHojasCalculo,
+                        'idPresentaciones'         => $idPresentaciones, 'idSotfGrafico' => $idSotfGrafico,
+                        'idLengProgramacion'       => $idLengProgramacion, 'idDispPc' => $idDispPc,
+                        'idEspacioEstudiar'        => $idEspacioEstudiar, 'idCurso' => $idCurso,
+                    ];
+            
+                    $idEstudiante = EstudianteService::createEstudiante($dataEstudiante, $data);
+                    $listaDeporte = explode(",", $data['deportes']);
+                    $listaArte = explode(",", $data['artes']);
+                    foreach ($listaDeporte as $deporte){
+                        if ($deporte != ""){
+                            $idDeporte = DeporteService::create($deporte);
+                            EstudianteDeporteService::create($idEstudiante, $idDeporte);
+                        }
+                    }
+                    foreach ($listaArte as $arte){
+                        if ($arte != ""){
+                            $idArte = ArteService::create($arte);
+                            EstudianteArteService::create($idEstudiante, $idArte);
+                        }
+                    }
+            
+                    $trans->commit();
+                    Yii::$app->session->setFlash('success', 'Ha sido introducido correctamente');
+                } catch (\Exception $e){
+                    $trans->rollBack();
+                    Yii::$app->session->setFlash('error', 'Ha ocurrido un error');
+                }
         
-                $idEstudiante = EstudianteService::createEstudiante($dataEstudiante, $data);
-                 $listaDeporte =explode(",", $data['deportes']);
-                $listaArte = explode(",",$data['artes']);
-                foreach ($listaDeporte as $deporte){
-                    if($deporte != ""){
-                        $idDeporte = DeporteService::create($deporte);
-                        EstudianteDeporteService::create($idEstudiante,$idDeporte);
-                    }
-                }
-                foreach ($listaArte as $arte){
-                    if($arte != ""){
-                        $idArte = ArteService::create($arte);
-                        EstudianteArteService::create($idEstudiante,$idArte);
-                    }
-                }
-                
-                $trans->commit();
-                Yii::$app->session->setFlash('success', 'Ha sido introducido correctamente');
-            }catch (\Exception $e){
-                $trans->rollBack();
-                Yii::$app->session->setFlash('error', 'Ha ocurrido un error');
+            }else{
+                Yii::$app->session->setFlash('info',
+                    'El estudiante ya ha sido introduccido anteriormente en el sistema');
             }
-            
-            
-        
-        
+    
+    
         }
     
     
