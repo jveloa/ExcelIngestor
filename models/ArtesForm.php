@@ -42,6 +42,7 @@
                 $lista = Estudiante::find()
                     ->innerJoin('estudiante_arte', 'estudiante_arte.id_estudiante = estudiante.carne')
                     ->where(['estudiante_arte.id_arte' => $this->idArte])
+                    ->andWhere(['id_curso'=> $this->idCurso])
                     ->all();
             }
             return $lista;
@@ -50,7 +51,11 @@
         public function getCantEstudiantes(){
             $cant = 0;
             if (isset($this->idArte)){
-                $cant = EstudianteArte::find()->where(['id_arte' => $this->idArte])->count();
+                $cant = Estudiante::find()
+                                  ->innerJoin('estudiante_arte', 'estudiante_arte.id_estudiante = estudiante.carne')
+                                  ->where(['estudiante_arte.id_arte' => $this->idArte])
+                                  ->andWhere(['id_curso'=> $this->idCurso])
+                                  ->count();
             }
             return $cant;
         }
