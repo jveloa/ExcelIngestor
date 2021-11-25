@@ -8,7 +8,7 @@
     use app\models\db\Deporte;
     use app\models\db\Estudiante;
     use yii\base\Model;
-    
+
     class EstudiantesHabitosForm extends Model{
         public $estudiante;
         public $idCurso;
@@ -35,7 +35,8 @@
         public function getEstudiantes(){
             $lista = [];
             if (isset($this->estudiante)){
-                $lista = Estudiante::find()->where(['ilike', 'nombre', $this->estudiante])->all();
+                $lista = Estudiante::find()->where(['ilike', 'nombre', $this->estudiante])
+                                   ->andWhere(['id_curso' => $this->idCurso])->all();
             }
             return $lista;
         }

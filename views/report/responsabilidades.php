@@ -52,6 +52,7 @@
             $estudiante     = Estudiante::find()->where(['id_interes_apoyar_orga' => $model->idResponsabilidades])
                 ->andWhere(['id_curso' => $model->idCurso])->orderBy("carne")->all();
             $cantEstudiante = Estudiante::find()->where(['id_interes_apoyar_orga' => $model->idResponsabilidades])
+                ->andWhere(['id_curso' => $model->idCurso])
                 ->count();
         }else{ //echo "Es nulo";
             $estudiante     = Estudiante::find()->where(['id_curso' => $model->idCurso])->orderBy("carne")->all();
