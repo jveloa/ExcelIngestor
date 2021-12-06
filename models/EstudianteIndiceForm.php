@@ -28,16 +28,16 @@ class EstudianteIndiceForm extends Model
     {
         return [
             [['indiceChk'], 'boolean'],
-            [['indiceText'], 'number','max'=>100,'min'=>0],
+            [['indiceText'], 'number','max'=>100,'min'=>1],
 
             [['espanolChk'], 'boolean'],
-            [['espanolText'], 'number','max'=>100,'min'=>0],
+            [['espanolText'], 'number','max'=>100,'min'=>1],
 
             [['matematicaChk'], 'boolean'],
-            [['matematicaText'], 'number','max'=>100,'min'=>0],
+            [['matematicaText'], 'number','max'=>100,'min'=>1],
 
             [['historiaChk'], 'boolean'],
-            [['historiaText'], 'number','max'=>100,'min'=>0],
+            [['historiaText'], 'number','max'=>100,'min'=>1],
 
             [['habilitarChk'], 'boolean'],
 
@@ -47,7 +47,7 @@ class EstudianteIndiceForm extends Model
     public function attributeLabels()
     {
         return [
-            'indiceText' => 'Indice academico',
+            'indiceText' => 'Índice académico',
             'espanolText' => 'Nota de Español',
             'matematicaText' => 'Nota de Matemática',
             'historiaText' => 'Nota de Historia',
