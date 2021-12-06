@@ -16,6 +16,7 @@ use app\models\EstudiantesHabitosForm;
 use app\models\EstudiantesHorasEstudiosForm;
 use app\models\EstudiantesNoComputadoraForm;
 use app\models\EstudiantesNotasIndiceForm;
+use app\models\OpcionesDeCarreraForm;
 use app\models\ResponsabilidadesForm;
 use app\models\ViaIngresoForm;
 use Yii;
@@ -513,9 +514,9 @@ class ReportController extends Controller
         $model = new ViaIngresoForm();
         if ($model->load(Yii::$app->request->post())) {
             $valorCurso= $model->cursoid;
-            return $this->render('via_ingreso', ['seleccionCurso' => $valorCurso,'model' => $model]);
+            return $this->render('via_ingreso', ['model' => $model]);
         }
-        return $this->render('via_ingreso', ['seleccionCurso' => "",'model' => $model]);
+        return $this->render('via_ingreso', ['model' => $model]);
     }
 
     public function actionResponsabilidades(){
@@ -556,13 +557,16 @@ class ReportController extends Controller
         return $this->render('estudiantes_habitos', ['model' => $model]);
     }
 
-
-
-
-
+    public function actionOpciones_carrera(){
+        $model = new OpcionesDeCarreraForm();
+        if ($model->load(Yii::$app->request->post())) {
+            return $this->render('opciones_carrera', ['model' => $model]);
+        }
+        return $this->render('opciones_carrera', ['model' => $model]);
+        
+    }
 
 
     
-
     
 }
