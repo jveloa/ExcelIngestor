@@ -18,6 +18,7 @@ use app\models\EstudiantesHorasEstudiosForm;
 use app\models\EstudiantesNoComputadoraForm;
 use app\models\EstudiantesNotasIndiceForm;
 use app\models\OpcionesDeCarreraForm;
+use app\models\RazonesIngresoForm;
 use app\models\ResponsabilidadesForm;
 use app\models\ViaIngresoForm;
 use Yii;
@@ -562,6 +563,17 @@ class ReportController extends Controller
         return $this->render('factores_carrera', ['model' => $model]);
 
     }
+    
+    public function actionRazones_ingreso(){
+        $model = new RazonesIngresoForm();
+        if ($model->load(Yii::$app->request->post())) {
+            return $this->render('razones_ingreso', ['model' => $model]);
+        }
+        return $this->render('razones_ingreso', ['model' => $model]);
+        
+    }
+    
+    
 
 
 
