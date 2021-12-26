@@ -2,16 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\TiempoEstudioCarreraForm;
 use app\models\FactoresCarreraForm;
 use app\models\ArtesForm;
 use app\models\db\RespSobreFuturo;
 use app\models\DeportesForm;
-use app\models\EgresadoDeSearch;
 use app\models\EgresadoForm;
 use app\models\EgresadoNotasForm;
 use app\models\EstadisticasCursoForm;
 use app\models\EstudianteIndiceForm;
-use app\models\EstudiantesCursoIndiceNotasForm;
 use app\models\EstudiantesFormasEstudiosForm;
 use app\models\EstudiantesHabitosForm;
 use app\models\EstudiantesHorasEstudiosForm;
@@ -23,7 +22,6 @@ use app\models\ResponsabilidadesForm;
 use app\models\ViaIngresoForm;
 use Yii;
 use yii\data\SqlDataProvider;
-use yii\filters\AccessController;
 use yii\web\Controller;
 use \yii\helpers\BaseArrayHelper;
 
@@ -573,12 +571,11 @@ class ReportController extends Controller
         
     }
     
-    
-
-
-
-
-    
-
-
+    public function  actionTiempo_desicion_estudio(){
+        $model = new TiempoEstudioCarreraForm();
+        if ($model->load(Yii::$app->request->post())) {
+            return $this->render('tiempo_estudio_carrera', ['model' => $model]);
+        }
+        return $this->render('tiempo_estudio_carrera', ['model' => $model]);
+    }
 }
