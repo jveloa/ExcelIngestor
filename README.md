@@ -1,17 +1,22 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+PROJECT DESCRIPTION
+-------------------
+   After years of using Excel files to carry out surveys, a website was created to make information extraction more agile and easier. This left many Excel files with valuable information but very difficult to process. This project was created to be able to absorb all the information from those files and use it in the new web system. This project is capable of taking one or more Excel files with a specific structure, validating the information it contains and saving the information in a
+PostgreSQL database, allowing you to filter information more quickly
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+    
+TECHNOLOGY OVERVIEW
+-------------------
+ 1. [Php](https://www.php.net/)
+ 1. [Yii2(Full Stack Framework)](https://www.yiiframework.com/)
+ 1. [PhpSpreadSheet(Php library)](https://github.com/PHPOffice/PhpSpreadsheet)
+ 1. [PostgreSQL](https://www.postgresql.org/)
+   
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+REQUIREMENTS
+------------
+
+The minimum requirement by this project template that your Web server supports PHP 5.6.0.
+
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
 [![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
